@@ -13,3 +13,11 @@ export const signUpDefaultValues = {
     password:'',
     confirmPassword:''
 }
+
+export const shippingAddressDefaultValues = {
+    fullName: 'Jhon Connor',
+    streetAddress: '123 ,main st',
+    city: 'Neverland',
+    postalCode: '12345',
+    country: 'Spain'
+}

@@ -43,7 +43,7 @@ export async function signUpUser(prevState: unknown, formData: FormData){
         const plainPassword = user.password
 
         user.password = await hash(user.password);
-        
+
         await prisma.user.create({
             data: {
                 name: user.name,
@@ -63,4 +63,13 @@ export async function signUpUser(prevState: unknown, formData: FormData){
         }
         return { success: false , message: formatError(error)}
     }
+}
+
+// Get user by the ID
+export async function getUserById(userId: string){
+    const user = await prisma.user.findFirst({
+        where: {id: userId}
+    })
+    if(!user) throw new Error('User not found')
+    return user
 }

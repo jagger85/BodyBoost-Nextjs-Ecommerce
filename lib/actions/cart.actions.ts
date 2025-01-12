@@ -103,7 +103,9 @@ export async function addItemToCart(data: CartItem) {
 
       return {
         success: true,
-        message: `${product.name} ${existItem ? 'updated in': 'added to'} cart`
+        message: `${product.name} ${
+          existItem ? 'updated in' : 'added to'
+        } cart`,
       }
     }
   } catch (error) {
@@ -117,6 +119,7 @@ export async function addItemToCart(data: CartItem) {
 export async function getMyCart() {
   //check for cart cookie
   const sessionCartId = (await cookies()).get('sessionCartId')?.value
+  console.log(sessionCartId)
   if (!sessionCartId) throw new Error('Cart session not found')
 
   //Get session and user Id
@@ -138,4 +141,58 @@ export async function getMyCart() {
     shippingPrice: cart.shippingPrice.toString(),
     taxPrice: cart.taxPrice.toString(),
   })
+}
+
+export async function removeItemFromCart(productId: string) {
+  try {
+    // Check for cart cookie
+    const sessionCartId = (await cookies()).get('sessionCartId')?.value
+    if (!sessionCartId) throw new Error('Cart session not found')
+
+    // Get product
+    const product = await prisma.product.findFirst({
+      where: { id: productId },
+    })
+    if (!product) throw new Error('Product not found')
+
+    // Get user cart
+    const cart = await getMyCart()
+    if (!cart) throw new Error('Cart not found')
+
+    // Check for item
+    const exist = (cart.items as CartItem[]).find(
+      x => x.productId === productId
+    )
+    if (!exist) throw new Error('Item not found')
+
+    // Check if onely one in qty
+    if (exist.qty === 1) {
+      // Remove from cart
+      cart.items = (cart.items as CartItem[]).filter(
+        x => x.productId !== exist.productId
+      )
+    } else {
+      //Decrese qty
+      ;(cart.items as CartItem[]).find(x => x.productId === productId)!.qty =
+        exist.qty - 1
+    }
+
+    // Update cart in database
+    await prisma.cart.update({
+      where: { id: cart.id },
+      data: {
+        items: cart.items as Prisma.CartUpdateitemsInput[],
+        ...calcPrice(cart.items as CartItem[]),
+      },
+    })
+
+    revalidatePath(`/product/${product.slug}`)
+
+    return {
+      success: true,
+      message: `${product.name} was removed from cart`,
+    }
+  } catch (error) {
+    return { success: false, message: formatError(error) }
+  }
 }
