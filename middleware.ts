@@ -1,6 +1,16 @@
-import { auth } from './auth'
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { getToken } from 'next-auth/jwt'
 
-export default auth
+export async function middleware(request: NextRequest) {
+  const token = await getToken({ req: request })
+
+  if (!token) {
+    return NextResponse.redirect(new URL('/signin', request.url))
+  }
+
+  return NextResponse.next()
+}
 
 export const config = {
   matcher: [
@@ -8,7 +18,5 @@ export const config = {
     '/cart',
     '/shipping-address',
     '/orders/:path*',
-    // Exclude these routes from middleware
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 }
