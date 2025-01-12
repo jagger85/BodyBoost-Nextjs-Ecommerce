@@ -15,9 +15,9 @@ export const signUpDefaultValues = {
 }
 
 export const shippingAddressDefaultValues = {
-    fullName: 'Jhon Connor',
-    streetAddress: '123 ,main st',
-    city: 'Neverland',
-    postalCode: '12345',
-    country: 'Spain'
+    fullName: '',
+    streetAddress: '',
+    city: '',
+    postalCode: '',
+    country: ''
 }
