@@ -1,4 +1,6 @@
-export { default as middleware } from 'next-auth/middleware'
+import { auth } from './auth'
+
+export default auth
 
 export const config = {
   matcher: [
