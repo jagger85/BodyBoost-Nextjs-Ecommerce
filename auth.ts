@@ -6,6 +6,7 @@ import { compare } from '@/lib/encrypt'
 import type { NextAuthConfig } from 'next-auth'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
+
 export const config = {
   pages: {
     signIn: '/sign-in',
