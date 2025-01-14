@@ -13,18 +13,19 @@ const OrderDetailsPage = async (props: {
     id: string
   }>
 }) => {
-    const {id} = await props.params
-    const order = await getOrderById(id)
-    if(!order) notFound()
+  const { id } = await props.params
+  const order = await getOrderById(id)
+  if (!order) notFound()
 
-    
   return (
-  <OrderDetaislTable 
-    order={{
-    ...order,
-    shippingAddress: order.shippingAddress as ShippingAddress
-  }}/>
-)
+    <OrderDetaislTable
+      order={{
+        ...order,
+        shippingAddress: order.shippingAddress as ShippingAddress,
+      }}
+      paypalClientId={process.env.PAYPAL_CLIENT_ID || 'sb'}
+    />
+  )
 }
 
 export default OrderDetailsPage
