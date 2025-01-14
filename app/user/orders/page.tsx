@@ -53,7 +53,7 @@ const OrderPage = async (props: { searchParams: Promise<{ page: string }> }) => 
               ))}
             </TableBody>
           </Table>
-          {orders.totalPages > 1 && <Pagination page={Number(page) || 1} totalPages={orders?.totalPages} />}
+          {orders.totalPages > 1 && <Pagination page={Number(page) || 1} totalPages={orders.totalPages} />}
         </div>
       </div>
     </>

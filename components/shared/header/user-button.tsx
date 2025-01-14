@@ -10,7 +10,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { UserIcon } from 'lucide-react'
-import AdminLayout from '@/app/admin/layout'
 const UserButton = async () => {
   const session = await auth()
 
