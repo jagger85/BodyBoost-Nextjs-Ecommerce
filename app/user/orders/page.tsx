@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { getMyOrders } from '@/lib/actions/order.actions'
-import { formatCurrecy, formatDateTime, formatId } from '@/lib/utils'
+import { formatCurrency, formatDateTime, formatId } from '@/lib/utils'
 import Link from 'next/link'
 import { Table, TableHeader, TableRow, TableCell, TableHead, TableBody } from '@/components/ui/table'
 import Pagination from '@/components/shared/pagination'
@@ -35,7 +35,7 @@ const OrderPage = async (props: { searchParams: Promise<{ page: string }> }) => 
                 <TableRow key={order.id}>
                   <TableCell>{formatId(order.id)}</TableCell>
                   <TableCell>{formatDateTime(order.createdAt).dateTime}</TableCell>
-                  <TableCell>{formatCurrecy(order.totalPrice)}</TableCell>
+                  <TableCell>{formatCurrency(order.totalPrice)}</TableCell>
                   <TableCell>
                     {order.isPaid && order.paidAt ? formatDateTime(order.paidAt).dateTime : 'Not Paid'}
                   </TableCell>

@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import Image from 'next/image'
-import { formatCurrecy } from '@/lib/utils'
+import { formatCurrency } from '@/lib/utils'
 import PlaceOrderForm from './place-order-form'
 export const metadata: Metadata = {
   title: 'Place order',
@@ -97,19 +97,19 @@ const PlaceOrderPage = async () => {
             <CardContent className='p-4 gap-4 space-y-4'>
               <div className='flex justify-between'>
                 <div>Items</div>
-                <div>{formatCurrecy(cart.itemsPrice)}</div>
+                <div>{formatCurrency(cart.itemsPrice)}</div>
               </div>
               <div className='flex justify-between'>
                 <div>Tax</div>
-                <div>{formatCurrecy(cart.taxPrice)}</div>
+                <div>{formatCurrency(cart.taxPrice)}</div>
               </div>
               <div className='flex justify-between'>
                 <div>Shipping</div>
-                <div>{formatCurrecy(cart.shippingPrice)}</div>
+                <div>{formatCurrency(cart.shippingPrice)}</div>
               </div>
               <div className='flex justify-between'>
                 <div>Total</div>
-                <div>{formatCurrecy(cart.totalPrice)}</div>
+                <div>{formatCurrency(cart.totalPrice)}</div>
               </div>
             <PlaceOrderForm/>
             </CardContent>

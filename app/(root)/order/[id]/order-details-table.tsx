@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
-import { formatCurrecy, formatDateTime, formatId } from '@/lib/utils'
+import { formatCurrency, formatDateTime, formatId } from '@/lib/utils'
 import { Order } from '@/types'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -183,19 +183,19 @@ const OrderDetaislTable = ({
             <CardContent className='p-4 gap-4 space-y-4'>
               <div className='flex justify-between'>
                 <div>Items</div>
-                <div>{formatCurrecy(itemsPrice)}</div>
+                <div>{formatCurrency(itemsPrice)}</div>
               </div>
               <div className='flex justify-between'>
                 <div>Tax</div>
-                <div>{formatCurrecy(taxPrice)}</div>
+                <div>{formatCurrency(taxPrice)}</div>
               </div>
               <div className='flex justify-between'>
                 <div>Shipping</div>
-                <div>{formatCurrecy(shippingPrice)}</div>
+                <div>{formatCurrency(shippingPrice)}</div>
               </div>
               <div className='flex justify-between'>
                 <div>Total</div>
-                <div>{formatCurrecy(totalPrice)}</div>
+                <div>{formatCurrency(totalPrice)}</div>
               </div>
               {/**PayPal Payment */}
               {!isPaid && paymentMethod == 'PayPal' && (

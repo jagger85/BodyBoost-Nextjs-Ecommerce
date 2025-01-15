@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import { deleteOrder, getAllOrders } from "@/lib/actions/order.actions";
 import { Metadata } from "next";
 import { Table, TableHeader, TableRow, TableCell, TableHead, TableBody } from '@/components/ui/table'
-import { formatCurrecy, formatDateTime, formatId } from '@/lib/utils'
+import { formatCurrency, formatDateTime, formatId } from '@/lib/utils'
 import Link from "next/link";
 import Pagination from "@/components/shared/pagination";
 import { Button } from "@/components/ui/button";
@@ -45,7 +45,7 @@ const AdminOrdersPage = async (props: {
                     <TableRow key={order.id}>
                       <TableCell>{formatId(order.id)}</TableCell>
                       <TableCell>{formatDateTime(order.createdAt).dateTime}</TableCell>
-                      <TableCell>{formatCurrecy(order.totalPrice)}</TableCell>
+                      <TableCell>{formatCurrency(order.totalPrice)}</TableCell>
                       <TableCell>
                         {order.isPaid && order.paidAt ? formatDateTime(order.paidAt).dateTime : 'Not Paid'}
                       </TableCell>

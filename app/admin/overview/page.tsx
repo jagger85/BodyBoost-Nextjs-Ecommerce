@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { auth } from '@/auth'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { BadgeDollarSign, CreditCard, Users } from 'lucide-react'
-import { formatCurrecy, formatDateTime, formatNumber } from '@/lib/utils'
+import { formatCurrency, formatDateTime, formatNumber } from '@/lib/utils'
 import { getOrderSummary } from '@/lib/actions/order.actions'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import Link from 'next/link'
@@ -31,7 +31,7 @@ const AdminOverviewPage = async () => {
           </CardHeader>
           <CardContent>
             <div className='text-2xl font-bold'>
-              {formatCurrecy(summary.totalSales._sum.totalPrice?.toString() || 0)}
+              {formatCurrency(summary.totalSales._sum.totalPrice?.toString() || 0)}
             </div>
           </CardContent>
         </Card>
@@ -96,7 +96,7 @@ const AdminOverviewPage = async () => {
                                 {formatDateTime(order.createdAt).dateOnly}
                             </TableCell>
                             <TableCell>
-                                {formatCurrecy(order.totalPrice)}
+                                {formatCurrency(order.totalPrice)}
                             </TableCell>
                             <TableCell>
                                 <Link href={`/order/${order.id}`}>
