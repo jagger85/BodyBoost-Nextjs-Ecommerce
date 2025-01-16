@@ -26,7 +26,19 @@ const AdminProductsPage = async (props: {
   return (
     <div className='space-y-2'>
       <div className='flex-between'>
-        <h1 className='h2-bold'>Products</h1>
+        <div className='flex items-center gap-3'>
+          <h1 className='h2-bold'>Products</h1>
+          {searchText && (
+            <div className='ml-4 pt-1'>
+              Filtered by <i>&quot;{searchText}&quot;</i>{' '}
+              <Link href='/admin/products'>
+                <Button variant='outline' size='sm' className='ml-4'>
+                  Remove Filter
+                </Button>
+              </Link>
+            </div>
+          )}
+        </div>
         <Button asChild variant='default'>
           <Link href='/admin/products/create'>Create Product</Link>
         </Button>
@@ -54,11 +66,9 @@ const AdminProductsPage = async (props: {
               <TableCell>{product.rating}</TableCell>
               <TableCell className='flex gap-1'>
                 <Button asChild variant='outline' size='sm'>
-                  <Link href={`/admin/products/${product.id}`} >Edit</Link>
+                  <Link href={`/admin/products/${product.id}`}>Edit</Link>
                 </Button>
-                <DeleteDialog id={product.id} action={deleteProduct}/>
-                 
-                
+                <DeleteDialog id={product.id} action={deleteProduct} />
               </TableCell>
             </TableRow>
           ))}
