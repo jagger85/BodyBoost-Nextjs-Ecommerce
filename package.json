@@ -16,6 +16,7 @@
     "@auth/prisma-adapter": "^2.7.4",
     "@hookform/resolvers": "^3.10.0",
     "@neondatabase/serverless": "^0.10.4",
+    "@netlify/plugin-nextjs": "^5.9.3",
     "@paypal/react-paypal-js": "^8.7.0",
     "@prisma/adapter-neon": "^6.2.1",
     "@radix-ui/react-alert-dialog": "^1.1.4",
