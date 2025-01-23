@@ -9,12 +9,22 @@ const currency = z
     'Price must have exactly two decimal places'
   )
 
-// Schema for product variant
-export const productVariantSchema = z.object({
+// Base schema for product variant
+const baseProductVariantSchema = z.object({
   flavor: z.string().min(1, 'Flavor is required'),
   servings: z.number().int().positive('Servings must be a positive number'),
   stock: z.number().int().nonnegative('Stock must be a non-negative number'),
   price: currency,
+})
+
+// Schema for creating product variant (used in forms)
+export const createProductVariantSchema = baseProductVariantSchema
+
+// Schema for product variant (with all fields)
+export const productVariantSchema = baseProductVariantSchema.extend({
+  id: z.string(),
+  productId: z.string(),
+  createdAt: z.date(),
 })
 
 // Schema for inserting products
@@ -28,7 +38,7 @@ export const insertProductSchema = z.object({
   images: z.array(z.string()).min(1, 'Product must have at least one image'),
   isFeatured: z.boolean(),
   banner: z.string().nullable(),
-  variants: z.array(productVariantSchema).min(1, 'Product must have at least one variant'),
+  variants: z.array(createProductVariantSchema).min(1, 'Product must have at least one variant'),
 })
 
 //Schema for update products
@@ -59,6 +69,7 @@ export const signUpFormSchema = z
 
 export const cartItemSchema = z.object({
   productId: z.string().min(1, 'Product is required'),
+  variantId: z.string().min(1, 'Variant is required'),
   name: z.string().min(1, 'Name is required'),
   slug: z.string().min(1, 'Slug is required'),
   qty: z.number().int().nonnegative().min(1, 'Quantitiy must be a positive number'),

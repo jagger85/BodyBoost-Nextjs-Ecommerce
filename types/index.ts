@@ -11,13 +11,12 @@ import {
   insertReviewSchema,
 } from '@/lib/validators'
 
-export type ProductVariant = z.infer<typeof productVariantSchema> & {
-  id: string
-  productId: string
-  createdAt: Date
-}
+export type ProductVariant = z.infer<typeof productVariantSchema>
 
-export type Product = z.infer<typeof insertProductSchema> & {
+// Base product type without variants
+type BaseProduct = Omit<z.infer<typeof insertProductSchema>, 'variants'>
+
+export type Product = BaseProduct & {
   id: string
   rating: number
   numReviews: number
@@ -26,7 +25,6 @@ export type Product = z.infer<typeof insertProductSchema> & {
 }
 
 export type CategoryType = { [key: string]: string[] }
-
 
 export type Cart = z.infer<typeof insertCartSchema>
 export type CartItem = z.infer<typeof cartItemSchema>

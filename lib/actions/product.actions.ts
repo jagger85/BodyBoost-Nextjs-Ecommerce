@@ -14,7 +14,17 @@ export async function getLatestProducts(): Promise<Product[]> {
     take: LATEST_PRODUCTS_LIMIT,
     orderBy: { createdAt: 'desc' },
     include: {
-      variants: true,
+      variants: {
+        select: {
+          id: true,
+          productId: true,
+          createdAt: true,
+          flavor: true,
+          servings: true,
+          stock: true,
+          price: true,
+        },
+      },
     },
   })
 
@@ -29,7 +39,17 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
   const data = await prisma.product.findFirst({
     where: { slug: slug },
     include: {
-      variants: true,
+      variants: {
+        select: {
+          id: true,
+          productId: true,
+          createdAt: true,
+          flavor: true,
+          servings: true,
+          stock: true,
+          price: true,
+        },
+      },
     },
   })
   return data
@@ -45,7 +65,17 @@ export async function getProductById(productId: string): Promise<Product | null>
   const data = await prisma.product.findFirst({
     where: { id: productId },
     include: {
-      variants: true,
+      variants: {
+        select: {
+          id: true,
+          productId: true,
+          createdAt: true,
+          flavor: true,
+          servings: true,
+          stock: true,
+          price: true,
+        },
+      },
     },
   })
   return data
@@ -290,7 +320,17 @@ export async function getFeaturedProducts(): Promise<Product[]> {
     orderBy: { createdAt: 'desc' },
     take: 4,
     include: {
-      variants: true,
+      variants: {
+        select: {
+          id: true,
+          productId: true,
+          createdAt: true,
+          flavor: true,
+          servings: true,
+          stock: true,
+          price: true,
+        },
+      },
     },
   })
 
