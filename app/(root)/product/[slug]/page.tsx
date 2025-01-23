@@ -9,11 +9,13 @@ import { getMyCart } from '@/lib/actions/cart.actions'
 import ReviewList from './review-list'
 import { auth } from '@/auth'
 import Rating from '@/components/shared/product/rating'
+
+
 const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) => {
   const { slug } = await props.params
 
   const product = await getProductBySlug(slug)
-
+  
   if (!product) notFound()
 
   const session = await auth()
