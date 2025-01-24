@@ -10,6 +10,7 @@ import {
   paymentResultSchema,
   insertReviewSchema,
 } from '@/lib/validators'
+import { StaticImageData } from 'next/image'
 
 export type ProductVariant = z.infer<typeof productVariantSchema>
 
@@ -54,4 +55,11 @@ export type Review = z.infer<typeof insertReviewSchema> & {
   id: string
   createdAt: Date
   user?: { name: string }
+}
+
+export type Benefit = {
+  id: string
+  name: string
+  image: StaticImageData
+  slug: string
 }
