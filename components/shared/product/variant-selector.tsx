@@ -14,7 +14,7 @@ export default function VariantSelector({ variants, selectedVariantId }: Variant
 
   return (
     <div>
-      <label htmlFor='variant-select' className='block text-sm font-medium text-gray-700 mb-2'>
+      <label htmlFor='variant-select' className='block text-sm font-medium mb-2'>
         Select Flavor
       </label>
       <Select

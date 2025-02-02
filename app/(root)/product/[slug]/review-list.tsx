@@ -27,7 +27,7 @@ const ReviewList = ({ userId, productId, productSlug }: { userId: string; produc
   }
 
   return (
-    <div className='space-y-4'>
+    <div className='space-y-4 mb-4'>
       {reviews.length === 0 && <div>No reviews yet</div>}
       {userId ? (
         <>
@@ -37,8 +37,8 @@ const ReviewList = ({ userId, productId, productSlug }: { userId: string; produc
         <>
           <div>
             Please{' '}
-            <Link className='text-blue-700 px-2' href={`/sign-in?callbackUrl=/product/${productSlug}`}>
-              sign in
+            <Link className='text-primary px-2' href={`/sign-in?callbackUrl=/product/${productSlug}`}>
+              Sign In
             </Link>
             to write a review
           </div>

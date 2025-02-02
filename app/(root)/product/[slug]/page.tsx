@@ -1,7 +1,6 @@
 import { getProductBySlug } from '@/lib/actions/product.actions'
 import { notFound } from 'next/navigation'
 import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
 import ProductPrice from '@/components/shared/product/product-price'
 import ProductImages from '@/components/shared/product/product-images'
 import AddToCart from '@/components/shared/product/add-to-cart'
@@ -10,7 +9,7 @@ import ReviewList from './review-list'
 import { auth } from '@/auth'
 import Rating from '@/components/shared/product/rating'
 import VariantSelector from '@/components/shared/product/variant-selector'
-
+import { Accordion, AccordionTrigger, AccordionContent, AccordionItem } from '@/components/ui/accordion'
 const ProductDetailsPage = async (props: {
   params: Promise<{ slug: string }>
   searchParams: Promise<{ variant?: string }>
@@ -33,52 +32,38 @@ const ProductDetailsPage = async (props: {
 
   return (
     <>
-      <section>
+      <section className='mt-4 rounded-lg'>
         <div className='grid grid-cols-1 md:grid-cols-5'>
           {/**Images column */}
-          <div className='col-span-2'>
+          <div className='col-span-2 p-5'>
             <ProductImages images={product.images} />
           </div>
           {/** Details column */}
-          <div className='col-span-2 p-5'>
-            <div className='flex flex-col gap-6'>
-              <p>
-                {product.brand} {product.category}
-              </p>
-              <h1 className='h3-bold'>{product.name}</h1>
-              <Rating value={Number(product.rating)} />
-              <p>{product.numReviews} reviews</p>
-
-              <div className='flex flex-col gap-4'>
-                <VariantSelector variants={product.variants} selectedVariantId={selectedVariant.id} />
-
-                <ProductPrice
-                  value={Number(selectedVariant.price)}
-                  className='w-24 rounded-full bg-green-100 text-green-700 px-5 py-2'
-                />
-              </div>
-            </div>
-            <div className='mt-10'>
-              <p className='font-semibold'>Description</p>
-              <p>{product.description}</p>
-            </div>
-          </div>
-          {/** Action column */}
-          <Card>
-            <CardContent className='p-4'>
-              <div className='mb-2 flex justify-between'>
-                <div>Price</div>
-                <div>
-                  <ProductPrice value={Number(selectedVariant.price)} />
-                </div>
-              </div>
-              <div className='mb-2 flex justify-between'>
-                <div>Status</div>
-                {selectedVariant.stock > 0 ? (
-                  <Badge variant='outline'>In stock</Badge>
+          <div className='col-span-3 p-10 pattern-grid rounded-lg'>
+            <div className='flex flex-col gap-4'>
+              <div className='flex justify-between w-full'>
+              {selectedVariant.stock > 0 ? (
+                  <Badge className='text-xl border-gray-600' variant='default'><span className='text-black'>In Stock</span></Badge>
                 ) : (
                   <Badge variant='destructive'>Out of stock</Badge>
                 )}
+                <div className='flex gap-2 align-middle bg-black p-2 border border-white rounded-lg'>
+                  <Rating value={Number(product.rating)} />
+                  <p>{product.numReviews} reviews</p>
+                </div>
+              </div>
+              <div className='flex flex-col gap-2'>
+              <div className='text-primary text-2xl font-extrabold'>{product.brand}</div>
+              <div className='text-4xl font-extrabold'>{product.name}</div>
+              <div>{product.category}</div>
+              </div>
+              <ProductPrice
+                value={Number(selectedVariant.price)}
+                className='w-fit p-2 rounded-md  text-white font-extrabold px-5 border-2 border-white'
+              />
+
+              <div className='flex flex-col gap-4'>
+                <VariantSelector variants={product.variants} selectedVariantId={selectedVariant.id} />
               </div>
               {selectedVariant.stock > 0 && (
                 <div className='flex-center'>
@@ -96,11 +81,23 @@ const ProductDetailsPage = async (props: {
                   />
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+            <div className='mt-10'>
+                <Accordion type='single' collapsible>
+                  <AccordionItem value='item-description'>
+                  <AccordionTrigger>Description</AccordionTrigger>
+                  <AccordionContent>{product.description}</AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem value='item-ingredients'>
+                  <AccordionTrigger>Ingredients</AccordionTrigger>
+                  <AccordionContent>{product.description}</AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+            </div>
+          </div>
         </div>
       </section>
-      <section className='mt-10'>
+      <section className='mt-10 flex flex-col gap-2'>
         <h2 className='h2-bold'>Customer Reviews</h2>
         <ReviewList userId={userId || ''} productId={product.id} productSlug={product.slug} />
       </section>
