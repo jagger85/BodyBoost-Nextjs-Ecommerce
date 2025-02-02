@@ -8,7 +8,7 @@
 }
 
 @font-face {
-  font-family: 'Ubuntu Sans-Family';
+  font-family: 'Ubuntu Sans';
   src:
     url('/assets/fonts/UbuntuSans-Regular.woff2') format('woff2'),
     url('/assets/fonts/UbuntuSans-Regular.woff') format('woff');
@@ -47,6 +47,15 @@
   .h3-bold {
     @apply font-bold text-xl lg:text-2xl;
   }
+
+  .pattern-grid {
+    background-image: linear-gradient(to right, transparent, #000000),
+      repeating-linear-gradient(26deg, #323231 0, #323231 2px, transparent 0, transparent 50%);
+    background-size:
+      100% 100%,
+      34.5px 17px;
+    background-color: #000000;
+  }
 }
 
 @layer base {
@@ -82,14 +91,9 @@
 }
 
 @layer base {
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
+    font-family: 'Ubuntu Sans', sans-serif;
   }
   body {
     @apply bg-background text-foreground;
