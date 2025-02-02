@@ -1,17 +1,18 @@
 import { APP_NAME } from "@/lib/constants";
 import { Facebook, Instagram, Youtube, Mail, Phone } from "lucide-react";
+import Image from "next/image";
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="border-t">
+        <footer className="border-t bg-black">
             <div className="max-w-7xl mx-auto py-10 px-5">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Brand Section */}
                     <div>
-                        <h3 className="font-bold text-xl mb-4">Khmer Body Boost</h3>
-                        <p className="text-muted-foreground text-sm">
+                        <Image src='/images/logo-3.png' alt='brand logo' width={200} height={50}/>
+                        <p className="text-muted-foreground text-sm mt-4">
                         Empowering you to move stronger, recover faster, and live healthier—because your potential is limitless.
                         </p>
                     </div>
@@ -59,7 +60,7 @@ const Footer = () => {
                 </div>
 
                 {/* Copyright */}
-                <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
+                <div className="mt-8 pt-8 text-center text-sm text-muted-foreground">
                     © {currentYear} {APP_NAME}. All rights reserved.
                 </div>
             </div>
