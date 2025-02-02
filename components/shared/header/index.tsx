@@ -7,7 +7,7 @@ import Search from './search'
 
 const Header = () => {
   return (
-    <header className='w-full border-b'>
+    <header className='w-full border-b bg-black'>
       <div className='wrapper flex-between'>
         <div className='flex-start'>
           <CategoryDrawer />
