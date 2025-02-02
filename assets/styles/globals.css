@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'VTF Redzone Classic';
   src:
-    url('/assets/fonts/VTFRedzone-Classic.woff2') format('woff2'),
-    url('/assets/fonts/VTFRedzone-Classic.woff') format('woff');
+    url('/fonts/VTFRedzone-Classic.woff2') format('woff2'),
+    url('/fonts/VTFRedzone-Classic.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -10,8 +10,8 @@
 @font-face {
   font-family: 'Ubuntu Sans';
   src:
-    url('/assets/fonts/UbuntuSans-Regular.woff2') format('woff2'),
-    url('/assets/fonts/UbuntuSans-Regular.woff') format('woff');
+    url('/fonts/UbuntuSans-Regular.woff2') format('woff2'),
+    url('/fonts/UbuntuSans-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -22,7 +22,7 @@
 
 @layer utilities {
   .wrapper {
-    @apply max-w-7xl lg:mx-auto p-5 md:px-10 w-full;
+    @apply max-w-7xl lg:mx-auto md:px-10 w-full;
   }
 
   .flex-start {
@@ -50,7 +50,7 @@
 
   .pattern-grid {
     background-image: linear-gradient(to right, transparent, #000000),
-      repeating-linear-gradient(26deg, #323231 0, #323231 2px, transparent 0, transparent 50%);
+      repeating-linear-gradient(334deg, #323231 0, #323231 2px, transparent 0, transparent 50%);
     background-size:
       100% 100%,
       34.5px 17px;
@@ -86,7 +86,7 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0;
+    --radius: 0.5rem;
   }
 }
 
