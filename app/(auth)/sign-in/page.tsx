@@ -25,8 +25,8 @@ const SignInPage =  async (props: {
     }
     return ( 
         <div className="w-full max-w-md mx-auto">
-            <Card>
-                <CardHeader className="space-y-4">
+            <Card className="pattern-grid">
+                <CardHeader className="space-y-4" >
                     <Link href='/' className="flex-center">
                     <Image 
                     src='/images/logo-3.png'

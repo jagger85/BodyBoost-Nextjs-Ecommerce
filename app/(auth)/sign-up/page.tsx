@@ -25,7 +25,7 @@ const SignUpPage =  async (props: {
     }
     return ( 
         <div className="w-full max-w-md mx-auto">
-            <Card>
+            <Card className="pattern-grid">
                 <CardHeader className="space-y-4">
                     <Link href='/' className="flex-center">
                     <Image 
