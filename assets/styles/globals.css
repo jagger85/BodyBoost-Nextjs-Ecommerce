@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'VTF Redzone Classic';
+  src: url('/assets/fonts/VTFRedzone-Classic.woff2') format('woff2'),
+       url('/assets/fonts/VTFRedzone-Classic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ubuntu Sans-Family';
+  src: url('/assets/fonts/UbuntuSans-Regular.woff2') format('woff2'),
+       url('/assets/fonts/UbuntuSans-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
