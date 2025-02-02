@@ -1,8 +1,8 @@
 'use client'
-
 import { useToast } from '@/hooks/use-toast'
-import { productDefaultValues } from '@/lib/constants'
+import { productCategories, productDefaultValues } from '@/lib/constants'
 import { insertProductSchema, updateProductSchema } from '@/lib/validators'
+import { formatNumberWithDecimal } from '@/lib/utils'
 import { Product } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
@@ -18,6 +18,9 @@ import { createProduct, updateProduct } from '@/lib/actions/product.actions'
 import { UploadButton } from '@/lib/uploadthing'
 import { Card, CardContent } from '../ui/card'
 import Image from 'next/image'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
+
+
 const ProductForm = ({
   type,
   product,
@@ -30,9 +33,21 @@ const ProductForm = ({
   const router = useRouter()
   const { toast } = useToast()
 
+  const defaultValues = {
+    ...productDefaultValues,
+    variants: [
+      {
+        flavor: '',
+        servings: 0,
+        stock: 0,
+        price: '0.00',
+      },
+    ],
+  }
+
   const form = useForm<z.infer<typeof insertProductSchema>>({
     resolver: type === 'Update' ? zodResolver(updateProductSchema) : zodResolver(insertProductSchema),
-    defaultValues: product && type == 'Update' ? product : productDefaultValues,
+    defaultValues: product && type === 'Update' ? product : defaultValues,
   })
 
   const onSubmit: SubmitHandler<z.infer<typeof insertProductSchema>> = async values => {
@@ -123,12 +138,58 @@ const ProductForm = ({
           <FormField
             control={form.control}
             name='category'
-            render={({ field }: { field: ControllerRenderProps<z.infer<typeof insertProductSchema>, 'category'> }) => (
+            render={({ field }) => (
               <FormItem className='w-full'>
                 <FormLabel>Category</FormLabel>
-                <FormControl>
-                  <Input placeholder='Enter category' {...field} />
-                </FormControl>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl>
+                    <SelectTrigger className='w-full'>
+                      <SelectValue placeholder='Select a category' />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {productCategories.map(cat => {
+                      const category = Object.keys(cat)[0]
+                      return (
+                        <SelectItem key={category} value={category}>
+                          {category}
+                        </SelectItem>
+                      )
+                    })}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/**SubCategory */}
+          <FormField
+            control={form.control}
+            name='subCategory'
+            render={({ field }) => (
+              <FormItem className='w-full'>
+                <FormLabel>Sub Category</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value} disabled={!form.watch('category')}>
+                  <FormControl>
+                    <SelectTrigger className='w-full'>
+                      <SelectValue placeholder='Select a subcategory' />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {form.watch('category') &&
+                      (() => {
+                        const categoryObj = productCategories.find(
+                          (cat) => Object.keys(cat)[0] === form.watch('category')
+                        )
+                        const subCategories = categoryObj ? Object.values(categoryObj)[0] : []
+                        return subCategories.map((subCat: string) => (
+                          <SelectItem key={subCat} value={subCat}>
+                            {subCat}
+                          </SelectItem>
+                        ))
+                      })()}
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
@@ -142,36 +203,6 @@ const ProductForm = ({
                 <FormLabel>Brand</FormLabel>
                 <FormControl>
                   <Input placeholder='Enter product brand' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className='flex flex-col md:flex-row gap-5'>
-          {/**Price */}
-          <FormField
-            control={form.control}
-            name='price'
-            render={({ field }: { field: ControllerRenderProps<z.infer<typeof insertProductSchema>, 'price'> }) => (
-              <FormItem className='w-full'>
-                <FormLabel>Price</FormLabel>
-                <FormControl>
-                  <Input placeholder='Enter product price' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/**Stock */}
-          <FormField
-            control={form.control}
-            name='stock'
-            render={({ field }: { field: ControllerRenderProps<z.infer<typeof insertProductSchema>, 'stock'> }) => (
-              <FormItem className='w-full'>
-                <FormLabel>Stock</FormLabel>
-                <FormControl>
-                  <Input placeholder='Enter stock' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -285,6 +316,122 @@ const ProductForm = ({
               </FormItem>
             )}
           />
+        </div>
+        <div className='space-y-4'>
+          <div className='flex items-center justify-between'>
+            <h3 className='text-lg font-medium'>Product Variants</h3>
+            <Button
+              type='button'
+              variant='outline'
+              size='sm'
+              onClick={() => {
+                const currentVariants = form.getValues('variants')
+                form.setValue('variants', [...currentVariants, { flavor: '', servings: 0, stock: 0, price: '0.00' }])
+              }}
+            >
+              Add Variant
+            </Button>
+          </div>
+
+          {form.watch('variants').map((_, index) => (
+            <Card key={index}>
+              <CardContent className='pt-6'>
+                <div className='flex justify-between items-center mb-4'>
+                  <h4 className='font-medium'>Variant {index + 1}</h4>
+                  {index > 0 && (
+                    <Button
+                      type='button'
+                      variant='destructive'
+                      size='sm'
+                      onClick={() => {
+                        const currentVariants = form.getValues('variants')
+                        form.setValue(
+                          'variants',
+                          currentVariants.filter((_, i) => i !== index)
+                        )
+                      }}
+                    >
+                      Remove
+                    </Button>
+                  )}
+                </div>
+
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                  <FormField
+                    control={form.control}
+                    name={`variants.${index}.flavor`}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Flavor</FormLabel>
+                        <FormControl>
+                          <Input placeholder='Enter flavor' {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name={`variants.${index}.servings`}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Servings</FormLabel>
+                        <FormControl>
+                          <Input
+                            type='number'
+                            placeholder='Enter servings'
+                            {...field}
+                            onChange={e => field.onChange(parseInt(e.target.value))}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name={`variants.${index}.stock`}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Stock</FormLabel>
+                        <FormControl>
+                          <Input
+                            type='number'
+                            placeholder='Enter stock'
+                            {...field}
+                            onChange={e => field.onChange(parseInt(e.target.value))}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name={`variants.${index}.price`}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Price</FormLabel>
+                        <FormControl>
+                          <Input
+                            type='number'
+                            step='0.01'
+                            placeholder='Enter price'
+                            {...field}
+                            onChange={e => field.onChange(formatNumberWithDecimal(parseFloat(e.target.value)))}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
         <div>
           {/** Submit */}
