@@ -6,7 +6,7 @@ const ChekoutSteps = ({ current = 0 }) => {
       {['User Login', 'Shipping Address', 'Payment Method', 'Place Order'].map((step, index) => (
         <React.Fragment key={step}>
           <div
-            className={cn('p-2 w-56 rounded-full text-center text-sm', index === current ? 'bg-secondary' : '')}
+            className={cn('p-2 w-56 rounded-full text-center text-sm', index === current ? 'bg-primary text-black' : '')}
           >
             {step}
           </div>

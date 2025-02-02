@@ -30,9 +30,9 @@ const PlaceOrderPage = async () => {
   const userAddress = user.address as ShippingAddress
 
   return (
-    <>
+    <div className='pb-6'>
       <ChekoutSteps current={3} />
-      <h1 className='py-4 text-2xl'>Place order</h1>
+      <h1 className='py-4 h2-bold'>Place order</h1>
       <div className='grid md:grid-cols-3 md:gap-5'>
         <div className='md:col-span-2 overflow-x-auto space-y-4' >
           <Card>
@@ -93,7 +93,7 @@ const PlaceOrderPage = async () => {
           </Card>
         </div>
         <div>
-          <Card>
+          <Card className='pattern-grid'>
             <CardContent className='p-4 gap-4 space-y-4'>
               <div className='flex justify-between'>
                 <div>Items</div>
@@ -116,7 +116,7 @@ const PlaceOrderPage = async () => {
           </Card>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
