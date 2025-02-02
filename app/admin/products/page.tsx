@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import Pagination from '@/components/shared/pagination'
 import DeleteDialog from '@/components/shared/delete-dialog'
+import { Product, ProductVariant } from '@/types'
+
 const AdminProductsPage = async (props: {
   searchParams: Promise<{
     page: string
@@ -17,7 +19,7 @@ const AdminProductsPage = async (props: {
   const searchText = searchParams.query || ''
   const category = searchParams.category || ''
 
-  const products = await getAllProducts({
+  const products: { data: Product[]; totalPages: number } = await getAllProducts({
     query: searchText,
     page,
     category,
@@ -48,30 +50,38 @@ const AdminProductsPage = async (props: {
           <TableRow>
             <TableHead>ID</TableHead>
             <TableHead>NAME</TableHead>
-            <TableHead className='text-right'>PRICE</TableHead>
-            <TableHead>CATEGORY</TableHead>
+            <TableHead>FLAVOR</TableHead>
+            <TableHead>SERVINGS</TableHead>
             <TableHead>STOCK</TableHead>
+            <TableHead>PRICE</TableHead>
+            <TableHead>CATEGORY</TableHead>
+            <TableHead>SUB CATEGORY</TableHead>
             <TableHead>RATING</TableHead>
             <TableHead className='w-[100px]'>ACTIONS</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {products.data.map(product => (
-            <TableRow key={product.id}>
-              <TableCell>{formatId(product.id)}</TableCell>
-              <TableCell>{product.name}</TableCell>
-              <TableCell className='text-right'>{formatCurrency(product.price)}</TableCell>
-              <TableCell>{product.category}</TableCell>
-              <TableCell>{product.stock}</TableCell>
-              <TableCell>{product.rating}</TableCell>
-              <TableCell className='flex gap-1'>
-                <Button asChild variant='outline' size='sm'>
-                  <Link href={`/admin/products/${product.id}`}>Edit</Link>
-                </Button>
-                <DeleteDialog id={product.id} action={deleteProduct} />
-              </TableCell>
-            </TableRow>
-          ))}
+          {products.data.map((product: Product) =>
+            product.variants.map((variant: ProductVariant) => (
+              <TableRow key={`${product.id}-${variant.id}`}>
+                <TableCell>{formatId(product.id)}</TableCell>
+                <TableCell>{product.name}</TableCell>
+                <TableCell>{variant.flavor}</TableCell>
+                <TableCell>{variant.servings}</TableCell>
+                <TableCell>{variant.stock}</TableCell>
+                <TableCell>{formatCurrency(variant.price)}</TableCell>
+                <TableCell>{product.category}</TableCell>
+                <TableCell>{product.subCategory}</TableCell>
+                <TableCell>{product.rating}</TableCell>
+                <TableCell className='flex gap-1'>
+                  <Button asChild variant='outline' size='sm'>
+                    <Link href={`/admin/products/${product.id}`}>Edit</Link>
+                  </Button>
+                  <DeleteDialog id={product.id} action={deleteProduct} />
+                </TableCell>
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
       {products.totalPages > 1 && <Pagination page={page} totalPages={products.totalPages} />}
