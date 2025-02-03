@@ -4,16 +4,16 @@ import ProductCarousel from '@/components/shared/product/product-carousel'
 import ViewAllProductsButton from '@/components/view-all-products-button'
 import IconBoxes from '@/components/icon-boxes'
 import DealCountDown from '@/components/deal-countdown'
-import ShopOurFavouitesSection from '@/components/sections/shop-our-favourites'
 import ShopBenefitSection from '@/components/sections/find-by-benefit'
 import MissionSection from '@/components/sections/mission'
+import Hero from '@/components/sections/hero'
 const Homepage = async () => {
   const latestProducts = await getLatestProducts()
   const featuredProducts = await getFeaturedProducts()
 
   return (
     <>
-      <ShopOurFavouitesSection />
+      <Hero/>
       <ShopBenefitSection />
       {featuredProducts.length > 0 && <ProductCarousel data={featuredProducts} />}
       <ProductList data={latestProducts} title='Newest Arrivals' />
