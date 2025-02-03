@@ -22,7 +22,7 @@
 
 @layer utilities {
   .wrapper {
-    @apply max-w-7xl lg:mx-auto md:px-10 w-full;
+    @apply max-w-7xl lg:mx-auto md:px-10 w-full ;
   }
 
   .flex-start {
@@ -56,7 +56,9 @@
       34.5px 17px;
     background-color: #000000;
   }
+
 }
+
 
 @layer base {
   :root {
@@ -73,7 +75,7 @@
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: #ffffff;
     --muted-foreground: #ffffff;
-    --accent: 210 40% 96.1%;
+    --accent: #aee223;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
