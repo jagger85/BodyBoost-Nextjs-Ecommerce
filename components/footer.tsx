@@ -6,8 +6,8 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="border-t bg-black">
-            <div className="max-w-7xl mx-auto py-10 px-5">
+        <footer id="footer" className="border-t bg-black p-6">
+            <div className="max-w-7xl mx-auto py-8 pb-0 px-5">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Brand Section */}
                     <div>
@@ -60,7 +60,7 @@ const Footer = () => {
                 </div>
 
                 {/* Copyright */}
-                <div className="mt-8 pt-8 text-center text-sm text-muted-foreground">
+                <div className=" text-center text-sm text-muted-foreground">
                     © {currentYear} {APP_NAME}. All rights reserved.
                 </div>
             </div>
