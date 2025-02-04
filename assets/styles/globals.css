@@ -22,7 +22,7 @@
 
 @layer utilities {
   .wrapper {
-    @apply max-w-7xl lg:mx-auto md:px-10 w-full ;
+    @apply max-w-7xl lg:mx-auto md:px-10 w-full;
   }
 
   .flex-start {
@@ -56,9 +56,10 @@
       34.5px 17px;
     background-color: #000000;
   }
-
+  .button-gradient-1 {
+    background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.75), transparent);
+  }
 }
-
 
 @layer base {
   :root {
