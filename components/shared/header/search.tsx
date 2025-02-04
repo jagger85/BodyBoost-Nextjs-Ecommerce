@@ -1,34 +1,34 @@
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Select, SelectValue, SelectTrigger, SelectContent, SelectItem } from '@/components/ui/select'
-import { getAllCategories } from '@/lib/actions/product.actions'
-import { SearchIcon } from 'lucide-react'
+import Link from 'next/link'
+import { productCategories } from '@/lib/constants'
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 const Search = async () => {
-  const categories = await getAllCategories()
-
   return (
     <form action='/search' method='GET'>
       <div className='flex with-full max-w-sm items-center space-x-2'>
-        <Select name='category'>
-          <SelectTrigger className='w-[180px]'>
-            <SelectValue placeholder='All' />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem key='All' value='all'>
-              All
-            </SelectItem>
-            {categories.map(x => (
-              <SelectItem key={x.category} value={x.category}>
-                {x.category}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Input name='q' type='text' placeholder='Search...' className='md:w-[100px] lg:w-[300px]' />
-        <Button>
-            <SearchIcon/>
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger>Shop</DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel className='text-xl text-primary'>CATEGORIES</DropdownMenuLabel>
+            {productCategories.map(category => {
+              const categoryName = Object.keys(category)[0]
+              return (
+                <DropdownMenuItem key={categoryName}>
+                  <Link href={`/search?category=${categoryName}`} className='font-extrabold'>
+                    {categoryName.toUpperCase()}
+                  </Link>
+                </DropdownMenuItem>
+              )
+            })}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </form>
   )
