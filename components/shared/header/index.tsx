@@ -13,7 +13,7 @@ const Header = () => {
             <Image 
             src='/images/header-logo.png'
             alt={`${APP_NAME} logo`}
-            width={200} 
+            width={280} 
             height={48} 
             priority={true} 
             />
