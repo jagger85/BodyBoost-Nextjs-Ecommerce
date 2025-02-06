@@ -42,8 +42,8 @@ const StatBox = ({ label, value }: { label: string; value: number }) => (
 
 const ActionButton = () => (
   <div className='text-center'>
-    <Button asChild>
-      <Link href='/search'>View Products</Link>
+    <Button asChild className='text-md font-bold w-40'>
+      <Link href='/search'>Buy Now</Link>
     </Button>
   </div>
 )

@@ -60,10 +60,10 @@ const StripePayment = ({
     <Elements
       options={{
         clientSecret,
-        // appearance: {
-        //   theme:
-        //     theme === 'dark' ? 'night' : theme === 'light' ? 'stripe' : systemTheme === 'light' ? 'stripe' : 'night',
-        // },
+        appearance: {
+          theme:
+            'night'
+        },
       }}
       stripe={stripePromise}
     >

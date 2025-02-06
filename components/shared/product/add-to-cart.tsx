@@ -1,7 +1,7 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
-import { Plus, Minus, Loader } from 'lucide-react'
+import { Plus, Minus, Loader, ArrowRight } from 'lucide-react'
 import { Cart, CartItem } from '@/types'
 import { useToast } from '@/hooks/use-toast'
 import { ToastAction } from '@/components/ui/toast'
@@ -29,11 +29,14 @@ const AddToCart = ({ cart, item }: { cart?: Cart; item: CartItem }) => {
         description: res.message,
         action: (
           <ToastAction
-            className='bg-primary text-white hover:bg-gray-800'
+            className='bg-primary text-white hover:bg-primary'
             altText='Go to cart'
             onClick={() => router.push('/cart')}
           >
-            <Plus /> Go To Cart
+            <div className=' flex gap-2 items-center justify-center text-black font-bold'>
+              Go To Cart
+              <ArrowRight /> 
+            </div>
           </ToastAction>
         ),
       })
@@ -58,31 +61,19 @@ const AddToCart = ({ cart, item }: { cart?: Cart; item: CartItem }) => {
   const existItem = cart && cart.items.find(x => x.productId === item.productId)
 
   return existItem ? (
-    <div>
+    <div className='flex gap-4'>
       <Button type='button' variant='outline' onClick={handleRemoveFromCart}>
-        {isPending ? (
-          <Loader className='w-4 h-4 animate-spin' />
-        ) : (
-          <Minus className='h-4 w-4' />
-        )}
+        {isPending ? <Loader className='w-4 h-4 animate-spin' /> : <Minus className='h-4 w-4' />}
       </Button>
 
-      <span className='px-2'>{existItem.qty}</span>
+      <span className='px-2 text-2xl font-semibold mt-1'>{existItem.qty}</span>
       <Button type='button' variant='outline' onClick={handleAddToCart}>
-        {isPending ? (
-          <Loader className='w-4 h-4 animate-spin' />
-        ) : (
-          <Plus className='h-4 w-4' />
-        )}
+        {isPending ? <Loader className='w-4 h-4 animate-spin' /> : <Plus className='h-4 w-4' />}
       </Button>
     </div>
   ) : (
     <Button className='w-full' type='button' onClick={handleAddToCart}>
-      {isPending ? (
-          <Loader className='w-4 h-4 animate-spin' />
-        ) : (
-          <Plus className='h-4 w-4' />
-        )}Add to cart
+      {isPending ? <Loader className='w-4 h-4 animate-spin' /> : <Plus className='h-4 w-4' />}Add to cart
     </Button>
   )
 }

@@ -9,10 +9,9 @@ const Hero = () => {
     <div className='wrapper w-full mt-8'>
       <div className='flex' style={{ position: 'relative' }}>
         <Image
-          className='rounded-big'
+          className='rounded-big w-full h-auto'
           src={heroImage}
           alt='people happy'
-          layout='responsive'
           width={200}
           height={200}
           style={{ opacity: 0.2 }}
@@ -26,9 +25,15 @@ const Hero = () => {
         >
           <div className='grid grid-cols-5 h-full p-6'>
             <div className='col-span-3 flex flex-col justify-center'>
-              <span className='text-xl md:text-5xl'><span className='font-extrabold'>Sport</span> Nutrition and</span>
-              <span className='mt-2 text-xl md:text-5xl'>Fitness <span className='font-extrabold'>Supplements</span></span>
-              <Button className='mt-6 w-fit text-white font-extrabold button-gradient-1'><span className='p-4 text-sm md:text-xl'>Explore Our Products</span></Button>
+              <span className='text-xl md:text-5xl'>
+                <span className='font-extrabold'>Sport</span> Nutrition and
+              </span>
+              <span className='mt-2 text-xl md:text-5xl'>
+                Fitness <span className='font-extrabold'>Supplements</span>
+              </span>
+              <Button className='mt-6 w-fit text-white font-extrabold button-gradient-1'>
+                <span className='p-4 text-sm md:text-xl'>Explore Our Products</span>
+              </Button>
             </div>
             <div
               className='col-span-2'
@@ -41,11 +46,11 @@ const Hero = () => {
                 src={splashImage}
                 alt='splash effect'
                 style={{
-                  position:'absolute',
+                  position: 'absolute',
                   zIndex: 1,
-                  scale:1.4,
-                  height:'70%',
-                  top:'15%'
+                  scale: 1.4,
+                  height: '70%',
+                  top: '15%',
                 }}
               />
               <Image
@@ -53,10 +58,10 @@ const Hero = () => {
                 alt='body boost supplement'
                 style={{
                   zIndex: 2,
-                  position:'absolute',
+                  position: 'absolute',
                   width: '60%',
-                  top:'25%',
-                  left:'20%'
+                  top: '25%',
+                  left: '20%',
                 }}
               />
             </div>

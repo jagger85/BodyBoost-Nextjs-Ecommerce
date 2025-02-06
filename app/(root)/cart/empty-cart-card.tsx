@@ -17,7 +17,7 @@ const EmptyCartCard = () => {
                     Looks like you haven&lsquo;t added anything to your cart yet
                 </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-">
+            <CardContent>
             <Link href='/'>
             <div className="flex justify-center items-center bg-primary rounded-lg p-2 text-black gap-2 font-bold">
             Go Shopping
