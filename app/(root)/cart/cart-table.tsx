@@ -24,8 +24,8 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
         <EmptyCartCard/>
       ) : (
         <>
-        <h1 className='py-4 h2-bold'>Shopping Cart</h1>
-        <div className='grid md:grid-cols-4 md:gap-5'>
+        <h1 className='wrapper py-4 h2-bold'>Shopping Cart</h1>
+        <div className='wrapper grid md:grid-cols-4 md:gap-5'>
           <div className='overflow-x-auto md:col-span-3'>
             <Table>
               <TableHeader>

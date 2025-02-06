@@ -30,7 +30,7 @@ const PlaceOrderPage = async () => {
   const userAddress = user.address as ShippingAddress
 
   return (
-    <div className='pb-6'>
+    <div className='wrapper pb-6'>
       <ChekoutSteps current={3} />
       <h1 className='py-4 h2-bold'>Place order</h1>
       <div className='grid md:grid-cols-3 md:gap-5'>

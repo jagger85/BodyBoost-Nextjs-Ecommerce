@@ -68,9 +68,11 @@ const BenefitCard = ({ benefit }: { benefit: (typeof benefits)[0] }) => (
 
 const ShopBenefitSection = () => {
   return (
-    <div className='wrapper flex flex-col w-full items-center justify-center mt-6'>
+    <div className='wrapper flex flex-col w-full items-center justify-center mt-10'>
+      <div className='flex flex-col items-center mb-2'>
       <div className='text-2xl'>Find By</div>
       <div className='text-4xl font-bold mb-4'>BENEFIT</div>
+      </div>
       <div className='w-full'>
         <div className='grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-4'>
           {benefits.map((benefit, index) => (
