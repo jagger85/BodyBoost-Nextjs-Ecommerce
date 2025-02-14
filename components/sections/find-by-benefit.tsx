@@ -60,7 +60,7 @@ const BenefitCard = ({ benefit }: { benefit: (typeof benefits)[0] }) => (
     <Image
       src={benefit.image}
       alt={benefit.alt}
-      className={`${benefit.className} opacity-60`}
+      className={`${benefit.className} opacity-80`}
       fill={!benefit.isFullHeight}
     />
   </div>
@@ -68,10 +68,14 @@ const BenefitCard = ({ benefit }: { benefit: (typeof benefits)[0] }) => (
 
 const ShopBenefitSection = () => {
   return (
-    <div className='wrapper flex flex-col w-full items-center justify-center mt-10'>
-      <div className='flex flex-col items-center mb-2'>
-      <div className='text-2xl'>Find By</div>
-      <div className='text-4xl font-bold mb-4'>BENEFIT</div>
+    <div className='wrapper-big flex flex-col w-full items-center justify-center mt-20'>
+      <div className='flex flex-col items-center mb-8'>
+        <div className='relative'>
+          <div className='text-3xl md:text-5xl  tracking-wider'>
+              FIND BY BENEFIT
+          </div>
+        </div>
+        <p className='text-muted-foreground mt-2 text-sm uppercase tracking-widest'>Fuel Your Goals</p>
       </div>
       <div className='w-full'>
         <div className='grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-4'>

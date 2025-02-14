@@ -22,7 +22,10 @@
 
 @layer utilities {
   .wrapper {
-    @apply max-w-7xl lg:mx-auto md:px-10 w-full;
+    @apply max-w-7xl lg:mx-auto px-4 md:px-10 w-full;
+  }
+  .wrapper-big {
+    @apply w-full px-4 md:px-10;
   }
 
   .flex-start {
@@ -81,7 +84,8 @@
 @layer base {
   :root {
     --black: #000000;
-    --background: #252529;
+    --background: #101010;
+    --background-lighter: #232323;
     --foreground: #ffffff;
     --card: 0 0% 100%;
     --card-foreground: #ffffff;

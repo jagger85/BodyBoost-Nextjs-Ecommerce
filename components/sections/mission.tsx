@@ -43,16 +43,16 @@ const MissionSection = () => {
   return (
     <section className='wrapper relative overflow-hidden py-20 px-4 md:px-8' aria-label='Body Boost Mission'>
       <div className='container mx-auto flex flex-col md:flex-row md:gap-12 md:justify-between items-center'>
-      <div className='absolute z-1 right-0 opacity-5 transition-opacity duration-1000'>
-        <Image
-          src='/images/logo-white.png'
-          alt='Background brand logo'
-          width={800}
-          height={800}
-          priority={false}
-          className='opacity-50'
-        />
-      </div>
+        <div className='absolute z-1 right-0 opacity-5 transition-opacity duration-1000'>
+          <Image
+            src='/images/logo-white.png'
+            alt='Background brand logo'
+            width={800}
+            height={800}
+            priority={false}
+            className='opacity-50'
+          />
+        </div>
         <div className='w-full md:w-1/2 mb-10 md:mb-0 transition-transform duration-500 hover:scale-[1.02]'>
           <div className='relative aspect-[4/3] w-full z-2'>
             <Image
@@ -71,7 +71,7 @@ const MissionSection = () => {
 
         <div className='flex flex-col justify-center items-center w-full md:w-2/5 space-y-8'>
           <div className='text-center space-y-4'>
-            <h2 className='text-white text-5xl font-bold tracking-tight'>Body Boost</h2>
+            <h2 className='text-white text-5xl tracking-wider font-redzone'>Body Boost</h2>
             <p className='text-3xl text-white/90 font-light'>Mission</p>
           </div>
 
@@ -110,8 +110,10 @@ const MissionSection = () => {
                   ))}
                 </CarouselContent>
               </div>
-              <CarouselPrevious className='absolute -left-4 top-1/2 -translate-y-1/2' />
-              <CarouselNext className='absolute -right-4 top-1/2 -translate-y-1/2' />
+              <div className='hidden md:block'>
+                <CarouselPrevious className='absolute left-1 top-1/2 -translate-y-1/2' />
+                <CarouselNext className='absolute right-1 top-1/2 -translate-y-1/2' />
+              </div>
             </Carousel>
           </div>
 

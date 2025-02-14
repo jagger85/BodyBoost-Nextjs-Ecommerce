@@ -10,6 +10,7 @@ import { auth } from '@/auth'
 import Rating from '@/components/shared/product/rating'
 import VariantSelector from '@/components/shared/product/variant-selector'
 import { Accordion, AccordionTrigger, AccordionContent, AccordionItem } from '@/components/ui/accordion'
+import Trio from '@/components/shared/product/trio'
 const ProductDetailsPage = async (props: {
   params: Promise<{ slug: string }>
   searchParams: Promise<{ variant?: string }>
@@ -32,18 +33,20 @@ const ProductDetailsPage = async (props: {
 
   return (
     <>
-      <section className='mt-4 rounded-lg'>
+      <section className='wrapper mt-4 rounded-lg'>
         <div className='grid grid-cols-1 md:grid-cols-5'>
           {/**Images column */}
-          <div className='col-span-2 p-5'>
+          <div className='col-span-2 p-4'>
             <ProductImages images={product.images} />
           </div>
           {/** Details column */}
           <div className='col-span-3 p-10 pattern-grid rounded-lg'>
             <div className='flex flex-col gap-4'>
               <div className='flex justify-between w-full'>
-              {selectedVariant.stock > 0 ? (
-                  <Badge className='text-xl border-gray-600' variant='default'><span className='text-black'>In Stock</span></Badge>
+                {selectedVariant.stock > 0 ? (
+                  <Badge className='text-xl border-gray-600' variant='default'>
+                    <span className='text-black'>In Stock</span>
+                  </Badge>
                 ) : (
                   <Badge variant='destructive'>Out of stock</Badge>
                 )}
@@ -53,9 +56,9 @@ const ProductDetailsPage = async (props: {
                 </div>
               </div>
               <div className='flex flex-col gap-2'>
-              <div className='text-primary text-2xl font-extrabold'>{product.brand}</div>
-              <div className='text-4xl font-extrabold'>{product.name}</div>
-              <div>{product.category}</div>
+                <div className='text-primary text-2xl font-extrabold'>{product.brand}</div>
+                <div className='text-4xl font-extrabold'>{product.name}</div>
+                <div>{product.category}</div>
               </div>
               <ProductPrice
                 value={Number(selectedVariant.price)}
@@ -83,22 +86,28 @@ const ProductDetailsPage = async (props: {
               )}
             </div>
             <div className='mt-10'>
-                <Accordion type='single' collapsible>
-                  <AccordionItem value='item-description'>
-                  <AccordionTrigger>Description</AccordionTrigger>
-                  <AccordionContent>{product.description}</AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value='item-ingredients'>
-                  <AccordionTrigger>Ingredients</AccordionTrigger>
-                  <AccordionContent>{product.description}</AccordionContent>
-                  </AccordionItem>
-                </Accordion>
+              <Trio /> 
             </div>
           </div>
         </div>
       </section>
-      <section className='mt-10 flex flex-col gap-2'>
-        <h2 className='h2-bold'>Customer Reviews</h2>
+      <section className='wrapper flex flex-col mt-6'>
+        <Accordion type='single' collapsible defaultValue='item-description'>
+          <AccordionItem value='item-description'>
+            <AccordionTrigger className='text-3xl'>Description</AccordionTrigger>
+            <AccordionContent className='text-xl'>{product.description}</AccordionContent>
+          </AccordionItem>
+          <AccordionItem value='item-ingredients'>
+            <AccordionTrigger className='text-3xl'>Ingredients</AccordionTrigger>
+            <AccordionContent className='text-xl font-thin'>{product.description}</AccordionContent>
+          </AccordionItem>
+          <AccordionItem value='item-how-to-use'>
+            <AccordionTrigger className='text-3xl'>How To Use</AccordionTrigger>
+            <AccordionContent className='text-xl'>{product.description}</AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </section>
+      <section className='wrapper mt-10 flex flex-col gap-2'>
         <ReviewList userId={userId || ''} productId={product.id} productSlug={product.slug} />
       </section>
     </>

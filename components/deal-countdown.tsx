@@ -10,7 +10,7 @@ const TARGET_DATE = new Date('2025-03-22T00:00:00')
 
 // Common section layout component
 const Section = ({ children }: { children: React.ReactNode }) => (
-  <section className='wrapper grid grid-cols-1 md:grid-cols-2 my-20'>{children}</section>
+  <section className='grid grid-cols-1 md:grid-cols-[1fr,auto] my-20 max-w-4xl mx-auto'>{children}</section>
 )
 
 // Common image component
@@ -105,9 +105,10 @@ const DealCountdown = () => {
 
   return (
     <Section>
-      <div className='flex flex-col gap-2 justify-center'>
-        <h3 className='text-3xl font-bold'>Deal Of The Month</h3>
-        <p>
+      <div className='flex flex-col gap-2 justify-center order-2 md:order-1'>
+        <h3 className='text-primary text-center text-5xl'>CREATINE</h3>
+        <h3 className='text-5xl tracking-wider text-center'>DEAL OF THE MONTH</h3>
+        <p className='text-center'>
           Get ready for a shopping experience like never before with our Deals of the Month! Every purchase comes with
           exclusive perks and offers, making this month a celebration of savvy choices and amazing deals. Don&apos;t
           miss out! 🎁🛒
@@ -119,7 +120,9 @@ const DealCountdown = () => {
         </ul>
         <ActionButton />
       </div>
-      <PromotionImage />
+      <div className='order-1 md:order-2 mb-8 md:mb-0'>
+        <PromotionImage />
+      </div>
     </Section>
   )
 }

@@ -16,9 +16,8 @@ const Homepage = async () => {
       <Hero/>
       <ShopBenefitSection/>
       {featuredProducts.length > 0 && <ProductCarousel data={featuredProducts} />}
-      <ProductList data={latestProducts} title='Newest Arrivals' />
+      <ProductList data={latestProducts} title='NEWEST ARRIVALS' />
       <MissionSection />
-      <ViewAllProductsButton />
       <DealCountDown />
       <IconBoxes />
     </>

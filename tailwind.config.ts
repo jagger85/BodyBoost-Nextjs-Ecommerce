@@ -13,6 +13,7 @@ export default {
         black: 'var(--black)',
         iconTextColor: 'var(--black)',
         background: 'var(--background)',
+        backgroundLighter:'var(--background-lighter)',
         foreground: 'var(--muted)',
         label: 'var(--label)',
         card: {
@@ -74,6 +75,9 @@ export default {
       animation: {
         slideDown: 'slideDown 300ms ease-out',
         slideUp: 'slideUp 300ms ease-out',
+      },
+      fontFamily: {
+        redzone: ['VTF Redzone Classic', 'sans-serif'],
       },
     },
   },
