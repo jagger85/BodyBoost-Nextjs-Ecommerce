@@ -12,6 +12,7 @@ import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from '@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { formatCurrency } from '@/lib/utils'
+import EmptyCartCard from './empty-cart-card'
 const CartTable = ({ cart }: { cart?: Cart }) => {
   const router = useRouter()
   const { toast } = useToast()
@@ -19,13 +20,12 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 
   return (
     <>
-      <h1 className='py-4 h2-bold'>Shopping Cart</h1>
       {!cart || cart.items.length === 0 ? (
-        <div>
-          Cart is empty. <Link href='/'>Go Shopping</Link>
-        </div>
+        <EmptyCartCard/>
       ) : (
-        <div className='grid md:grid-cols-4 md:gap-5'>
+        <>
+        <h1 className='wrapper py-4 h2-bold'>Shopping Cart</h1>
+        <div className='wrapper grid md:grid-cols-4 md:gap-5'>
           <div className='overflow-x-auto md:col-span-3'>
             <Table>
               <TableHeader>
@@ -60,7 +60,7 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
                             }
                           })
                         }
-                      >
+                        >
                         {isPending ? <Loader className='w-4 h-4 animate-spin' /> : <Minus className='h-4 w-4' />}
                       </Button>
                       <span>{item.qty}</span>
@@ -79,7 +79,7 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
                             }
                           })
                         }
-                      >
+                        >
                         {isPending ? <Loader className='w-4 h-4 animate-spin' /> : <Plus className='h-4 w-4' />}
                       </Button>
                     </TableCell>
@@ -100,6 +100,7 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
             </CardContent>
           </Card>
         </div>
+            </>
       )}
     </>
   )

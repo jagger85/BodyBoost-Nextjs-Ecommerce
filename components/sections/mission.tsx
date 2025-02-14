@@ -4,6 +4,9 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Trophy, Medal, HeartPulse, Handshake } from 'lucide-react'
 import React from 'react'
 import { Card, CardHeader, CardContent } from '@/components/ui/card'
+import { Button } from '../ui/button'
+import Link from 'next/link'
+import { cn } from '@/lib/utils'
 
 const MissionSection = () => {
   const missions = [
@@ -38,40 +41,91 @@ const MissionSection = () => {
   ]
 
   return (
-    <div className='flex flex-col md:flex-row items-center gap-8 py-16 px-4 md:px-8 max-w-7xl mx-auto'>
-      <div className='w-full md:w-1/2'>
-        <Image src={missionImage} alt='man running' className='rounded-lg object-cover w-full h-[300px]' style={{transform: 'scaleX(-1)'}} />
-      </div>
-      <div className='w-full md:w-2/3 space-y-2'>
-        <div className='flex flex-col gap-2 items-center'>
-          <div className='text-gray-600 font-medium'>Body Boost</div>
-          <div className='text-4xl font-bold text-gray-900'>Mission</div>
+    <section className='wrapper relative overflow-hidden py-20 px-4 md:px-8' aria-label='Body Boost Mission'>
+      <div className='container mx-auto flex flex-col md:flex-row md:gap-12 md:justify-between items-center'>
+        <div className='absolute z-1 right-0 opacity-5 transition-opacity duration-1000'>
+          <Image
+            src='/images/logo-white.png'
+            alt='Background brand logo'
+            width={800}
+            height={800}
+            priority={false}
+            className='opacity-50'
+          />
         </div>
-        <Carousel className='w-full mb-12'>
-          <CarouselContent>
-            {missions.map(mission => (
-              <CarouselItem key={mission.id} className='basis-1/2'>
-                <div className='space-y-4 text-center px-4'>
-                  <Card className='border-none'>
-                    <CardHeader className='flex flex-col items-center pt-2'>
-                      {React.cloneElement(mission.icon, { className: 'w-8 h-8 text-gray-700' })}
-                      <div className='text-base font-semibold text-gray-900'>{mission.title}</div>
-                    </CardHeader>
-                    <CardContent>
-                      <div className='text-gray-600 leading-relaxed max-w-md mx-auto text-sm'>
-                        {mission.description}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className='left-0' />
-          <CarouselNext className='right-0' />
-        </Carousel>
+        <div className='w-full md:w-1/2 mb-10 md:mb-0 transition-transform duration-500 hover:scale-[1.02]'>
+          <div className='relative aspect-[4/3] w-full z-2'>
+            <Image
+              src={missionImage}
+              alt='Athlete in motion representing our mission'
+              className='rounded-xl object-cover shadow-lg opacity-60'
+              style={{ transform: 'scaleX(-1)' }}
+              fill
+              sizes='(max-width: 768px) 100vw, 50vw'
+              priority
+              placeholder='blur'
+              blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx0cHBwcHy4lJyctLzkyMi8nLy0wO0BCPzhLPS0yRWFFS1NWW1xfOUNXY2NfXGFbW1v/2wBDARUXFxwcHBwcHBwbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxv/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
+            />
+          </div>
+        </div>
+
+        <div className='flex flex-col justify-center items-center w-full md:w-2/5 space-y-8'>
+          <div className='text-center space-y-4'>
+            <h2 className='text-white text-5xl tracking-wider font-redzone'>Body Boost</h2>
+            <p className='text-3xl text-white/90 font-light'>Mission</p>
+          </div>
+
+          <div className='relative w-full max-w-xl mx-auto'>
+            <Carousel
+              opts={{
+                loop: true,
+                align: 'center',
+              }}
+              className='w-full max-w-xl relative mx-auto'
+            >
+              <div className='mx-12'>
+                <CarouselContent>
+                  {missions.map(mission => (
+                    <CarouselItem key={mission.id}>
+                      <Card
+                        className={cn(
+                          'border pattern-grid-semitransparent backdrop-blur-sm',
+                          'transition-all duration-300 hover:border-primary/50 group'
+                        )}
+                      >
+                        <CardHeader className='flex flex-col items-center space-y-4 pb-4'>
+                          <div className='p-3 rounded-full bg-primary/10 transition-transform duration-300 group-hover:scale-110'>
+                            {React.cloneElement(mission.icon, {
+                              className: 'w-8 h-8 text-primary',
+                              'aria-hidden': 'true',
+                            })}
+                          </div>
+                          <h3 className='text-xl font-bold text-white'>{mission.title}</h3>
+                        </CardHeader>
+                        <CardContent>
+                          <p className='text-white/90 leading-relaxed text-center'>{mission.description}</p>
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </div>
+              <div className='hidden md:block'>
+                <CarouselPrevious className='absolute left-1 top-1/2 -translate-y-1/2' />
+                <CarouselNext className='absolute right-1 top-1/2 -translate-y-1/2' />
+              </div>
+            </Carousel>
+          </div>
+
+          <Button
+            asChild
+            className='px-8 py-6 text-lg font-semibold w-full md:w-3/4 transition-all duration-300 hover:scale-105'
+          >
+            <Link href='/search'>View All Products</Link>
+          </Button>
+        </div>
       </div>
-    </div>
+    </section>
   )
 }
 

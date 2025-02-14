@@ -13,8 +13,8 @@ export default function VariantSelector({ variants, selectedVariantId }: Variant
   const router = useRouter()
 
   return (
-    <div>
-      <label htmlFor='variant-select' className='block text-sm font-medium text-gray-700 mb-2'>
+    <div className='mt-4'>
+      <label htmlFor='variant-select' className='block text-xl font-bold mb-2'>
         Select Flavor
       </label>
       <Select

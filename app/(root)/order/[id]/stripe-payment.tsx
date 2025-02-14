@@ -1,6 +1,5 @@
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements, LinkAuthenticationElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import { useTheme } from 'next-themes'
 import { FormEvent, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { formatCurrency } from '@/lib/utils'
@@ -15,7 +14,6 @@ const StripePayment = ({
   clientSecret: string
 }) => {
   const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string)
-  const { theme, systemTheme } = useTheme()
 
     // Stripe form component 
     const StripeForm = () =>{
@@ -64,7 +62,7 @@ const StripePayment = ({
         clientSecret,
         appearance: {
           theme:
-            theme === 'dark' ? 'night' : theme === 'light' ? 'stripe' : systemTheme === 'light' ? 'stripe' : 'night',
+            'night'
         },
       }}
       stripe={stripePromise}

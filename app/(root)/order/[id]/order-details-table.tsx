@@ -121,8 +121,8 @@ const OrderDetaislTable = ({
   }
   return (
     <>
-      <h1 className='py-4 text-2xl'>Oder {formatId(order.id)}</h1>
-      <div className='grid md:grid-cols-3 md:gap-5'>
+      <h1 className='wrapper py-4 text-2xl'>Oder {formatId(order.id)}</h1>
+      <div className='wrapper grid md:grid-cols-3 md:gap-5'>
         <div className='col-span-2 space-y-4 overflow-x-auto'>
           <Card>
             <CardContent className='p-4 gap-4'>
