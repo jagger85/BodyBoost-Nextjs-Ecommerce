@@ -22,9 +22,9 @@ const ShippingAddressPage = async () => {
 
   const user = await getUserById(userId)
 
-  return <>
+  return <div className='pb-6'>
     <ChekoutSteps current={1}/>
-  <ShippingAddressForm address={user.address as ShippingAddress}/></>
+  <ShippingAddressForm address={user.address as ShippingAddress}/></div>
 }
 
 export default ShippingAddressPage

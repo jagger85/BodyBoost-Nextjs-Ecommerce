@@ -1,10 +1,31 @@
+@font-face {
+  font-family: 'VTF Redzone Classic';
+  src:
+    url('/fonts/VTFRedzone-Classic.woff2') format('woff2'),
+    url('/fonts/VTFRedzone-Classic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ubuntu Sans';
+  src:
+    url('/fonts/UbuntuSans-Regular.woff2') format('woff2'),
+    url('/fonts/UbuntuSans-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer utilities {
   .wrapper {
-    @apply max-w-7xl lg:mx-auto p-5 md:px-10 w-full;
+    @apply max-w-7xl lg:mx-auto px-4 md:px-10 w-full;
+  }
+  .wrapper-big {
+    @apply w-full px-4 md:px-10;
   }
 
   .flex-start {
@@ -29,29 +50,61 @@
   .h3-bold {
     @apply font-bold text-xl lg:text-2xl;
   }
+
+  .pattern-grid {
+    background-image: linear-gradient(to right, transparent, #000000),
+      repeating-linear-gradient(334deg, #323231 0, #323231 2px, transparent 0, transparent 50%);
+    background-size:
+      100% 100%,
+      34.5px 17px;
+    background-color: #000000;
+  }
+  .pattern-grid-semitransparent {
+    background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5)),
+      repeating-linear-gradient(
+        334deg,
+        rgba(50, 50, 50, 0.5) 0,
+        rgba(50, 50, 50, 0.5) 2px,
+        transparent 0,
+        transparent 50%
+      );
+    background-size:
+      100% 100%,
+      34.5px 17px;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .button-gradient-1 {
+    background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.75), transparent);
+  }
+  .button-gradient-2 {
+    background-image: linear-gradient(25deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9) 60%);
+  }
 }
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --black: #000000;
+    --background: #101010;
+    --background-lighter: #232323;
+    --foreground: #ffffff;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: #ffffff;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
+    --primary: #aee223;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
+    --muted: #ffffff;
+    --muted-foreground: #ffffff;
+    --accent: #aee223;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
+    --label: #ffffff;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -59,54 +112,43 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
-}
 
-@layer base {
-  body {
-    @apply bg-background text-foreground;
+  html {
+    scroll-behavior: smooth;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    font-family: 'Ubuntu Sans', sans-serif;
   }
   body {
     @apply bg-background text-foreground;
   }
 }
 
-
 /* Uploadthing button text override*/
 html.dark .upload-field .text-white {
-  color: #ffffff !important
+  color: #ffffff !important;
 }
 .upload-field .text-white {
-  color: #000000 !important
+  color: #000000 !important;
+}
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
 }
