@@ -39,6 +39,9 @@ export const insertProductSchema = z.object({
   isFeatured: z.boolean(),
   banner: z.string().nullable(),
   variants: z.array(createProductVariantSchema).min(1, 'Product must have at least one variant'),
+  what: z.string().min(3, 'What must be at least 3 characters').max(85, 'What must be at most 85 characters'),
+  when: z.string().min(3, 'When must be at least 3 characters').max(85, 'When must be at most 85 characters'),
+  why: z.string().min(3, 'Why must be at least 3 characters').max(85, 'Why must be at most 85 characters'),
 })
 
 //Schema for update products
