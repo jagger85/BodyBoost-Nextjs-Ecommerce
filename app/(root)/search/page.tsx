@@ -31,7 +31,7 @@ const prices = [
 
 const ratings = [4, 3, 2, 1];
 
-const sortOrders = ['newest', 'lowest', 'highest', 'rating'];
+const sortOrders = ['newest', 'lowest', 'highest'];
 
 export async function generateMetadata(props: {
   searchParams: Promise<{
@@ -125,7 +125,7 @@ const SearchPage = async (props: {
   const categories = await getAllCategories();
 
   return (
-    <div className='wrapper grid md:grid-cols-5 md:gap-5'>
+    <div className='wrapper grid md:grid-cols-5 md:gap-5 mb-8'>
       <div className='filter-links'>
         {/* Category Links */}
         <div className='text-xl mb-2 mt-3'>Department</div>
@@ -154,7 +154,7 @@ const SearchPage = async (props: {
           </ul>
         </div>
         {/* Price Links */}
-        <div className='text-xl mb-2 mt-8'>Price</div>
+        {/* <div className='text-xl mb-2 mt-8'>Price</div>
         <div>
           <ul className='space-y-1'>
             <li>
@@ -177,7 +177,7 @@ const SearchPage = async (props: {
             ))}
           </ul>
         </div>
-        {/* Rating Links */}
+        {/* Rating Links
         <div className='text-xl mb-2 mt-8'>Customer Ratings</div>
         <div>
           <ul className='space-y-1'>
@@ -198,9 +198,9 @@ const SearchPage = async (props: {
                   {`${r} stars & up`}
                 </Link>
               </li>
-            ))}
+            ))} 
           </ul>
-        </div>
+        </div> */}
       </div>
       <div className='md:col-span-4 space-y-4'>
         <div className='flex-between flex-col md:flex-row my-4'>
@@ -208,11 +208,11 @@ const SearchPage = async (props: {
             {q !== 'all' && q !== '' && 'Query: ' + q}
             {category !== 'all' && category !== '' && 'Category: ' + category}
             {price !== 'all' && ' Price: ' + price}
-            {rating !== 'all' && ' Rating: ' + rating + ' stars & up'}
+             {rating !== 'all' && ' Rating: ' + rating + ' stars & up'} 
             &nbsp;
             {(q !== 'all' && q !== '') ||
             (category !== 'all' && category !== '') ||
-            rating !== 'all' ||
+           rating !== 'all'||
             price !== 'all' ? (
               <Button variant={'link'} asChild>
                 <Link href='/search'>Clear</Link>
@@ -235,7 +235,9 @@ const SearchPage = async (props: {
         <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
           {products.data.length === 0 && <div>No products found</div>}
           {products.data.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <div key={product.id} className='flex justify-center'>
+            <ProductCard product={product} />
+            </div>
           ))}
         </div>
       </div>

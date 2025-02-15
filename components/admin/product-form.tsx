@@ -209,6 +209,47 @@ const ProductForm = ({
             )}
           />
         </div>
+        <div className='flex md:flex-row gap-5'>
+            <FormField
+              control={form.control}
+              name='what'
+              render={({ field }: { field: ControllerRenderProps<z.infer<typeof insertProductSchema>, 'what'> }) => (
+                <FormItem className='w-full'>
+                  <FormLabel>What?</FormLabel>
+                  <FormControl>
+                    <Input placeholder='Enter product what' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='when'
+              render={({ field }: { field: ControllerRenderProps<z.infer<typeof insertProductSchema>, 'when'> }) => (
+                <FormItem className='w-full'>
+                  <FormLabel>When?</FormLabel>
+                  <FormControl>
+                    <Input placeholder='Enter product when' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='why'
+              render={({ field }: { field: ControllerRenderProps<z.infer<typeof insertProductSchema>, 'why'> }) => (
+                <FormItem className='w-full'>
+                  <FormLabel>Why?</FormLabel>
+                  <FormControl>
+                    <Input placeholder='Enter product why' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+        </div>
         <div className='upload-field flex flex-col md:flex-row gap-5'>
           {/**Images */}
           <FormField

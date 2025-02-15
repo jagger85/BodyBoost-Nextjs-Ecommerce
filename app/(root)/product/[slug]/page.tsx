@@ -42,7 +42,7 @@ const ProductDetailsPage = async (props: {
           {/** Details column */}
           <div className='col-span-3 p-10 pattern-grid rounded-lg'>
             <div className='flex flex-col gap-4'>
-              <div className='flex justify-between w-full'>
+              <div className='flex justify-between w-full flex-wrap gap-4'>
                 {selectedVariant.stock > 0 ? (
                   <Badge className='text-xl border-gray-600' variant='default'>
                     <span className='text-black'>In Stock</span>

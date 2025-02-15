@@ -6,6 +6,11 @@ import muscleGrowthImage from '@/assets/muscle-growth.jpg'
 import weigthLossImage from '@/assets/weigth-loss.png'
 import foodImage from '@/assets/food.png'
 import { Button } from '../ui/button'
+import { useRouter } from 'next/navigation'
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
+import { productCategories } from '@/lib/constants'
+const baseUrl = '/search?category='
+
 
 // Define benefit data structure
 const benefits = [
@@ -16,6 +21,7 @@ const benefits = [
     className: 'rounded-t-big rounded-bl-big',
     isFullHeight: true,
     buttonWidth: 'w-3/4',
+    url: `${baseUrl}${Object.keys(productCategories[0])[0]}`,
   },
   {
     title: 'Weight Loss',
@@ -24,6 +30,7 @@ const benefits = [
     className: 'rounded-t-big rounded-br-big',
     isFullHeight: true,
     buttonWidth: 'w-3/4',
+    url: `${baseUrl}${Object.keys(productCategories[1])[0]}`,
   },
   {
     title: 'Wellness',
@@ -32,6 +39,7 @@ const benefits = [
     className: 'rounded-t-big rounded-br-big',
     isFullHeight: true,
     buttonWidth: 'w-3/4',
+    url: `${baseUrl}${Object.keys(productCategories[2])[0]}`,
   },
   {
     title: 'Endurance',
@@ -40,6 +48,7 @@ const benefits = [
     className: 'rounded-t-big rounded-bl-big',
     isFullHeight: false,
     buttonWidth: 'w-2/4',
+    url: `${baseUrl}${Object.keys(productCategories[3])[0]}`,
   },
   {
     title: 'Food',
@@ -48,16 +57,18 @@ const benefits = [
     className: 'rounded-b-big rounded-tr-big',
     isFullHeight: false,
     buttonWidth: 'w-2/4',
+    url: `${baseUrl}${Object.keys(productCategories[4])[0]}`,
   },
 ]
 
 // Benefit Card Component
-const BenefitCard = ({ benefit }: { benefit: (typeof benefits)[0] }) => (
+const BenefitCard = ({ benefit, router }: { benefit: (typeof benefits)[0], router: AppRouterInstance   }) => (
   <div className={`relative flex justify-center items-center ${benefit.isFullHeight ? 'row-span-2' : ''}`}>
-    <Button className={`absolute button-gradient-2 z-10 text-w font-extrabold ${benefit.buttonWidth}`}>
-      {benefit.title}
-    </Button>
-    <Image
+  
+      <Button onClick={() => router.push(benefit.url)} className={`absolute button-gradient-2 z-10 text-w font-extrabold ${benefit.buttonWidth}`}>
+        {benefit.title}
+      </Button>
+  <Image
       src={benefit.image}
       alt={benefit.alt}
       className={`${benefit.className} opacity-80`}
@@ -67,6 +78,7 @@ const BenefitCard = ({ benefit }: { benefit: (typeof benefits)[0] }) => (
 )
 
 const ShopBenefitSection = () => {
+  const router = useRouter()
   return (
     <div className='wrapper-big flex flex-col w-full items-center justify-center mt-20'>
       <div className='flex flex-col items-center mb-8'>
@@ -80,7 +92,7 @@ const ShopBenefitSection = () => {
       <div className='w-full'>
         <div className='grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-4'>
           {benefits.map((benefit, index) => (
-            <BenefitCard key={index} benefit={benefit} />
+            <BenefitCard key={index} benefit={benefit} router={router} />
           ))}
         </div>
       </div>

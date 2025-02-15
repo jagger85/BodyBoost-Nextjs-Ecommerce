@@ -1,10 +1,12 @@
+'use client'
 import Image from 'next/image'
 import splashImage from '@/assets/Effect.png'
 import supplementImage from '@/assets/Supplement.png'
 import heroImage from '@/assets/hands-up.jpg'
 import { Button } from '../ui/button'
-
+import { useRouter } from 'next/navigation'
 const Hero = () => {
+  const router = useRouter()
   return (
     <div className='wrapper-big w-full mt-8'>
       <div className='flex' style={{ position: 'relative' }}>
@@ -29,7 +31,7 @@ const Hero = () => {
               <span className='mt-2 '>
                 Fitness <span className='font-extrabold'>Supplements</span>
               </span>
-              <Button className='mt-6 w-fit text-white font-extrabold button-gradient-1'>
+              <Button className='mt-6 w-fit text-white font-extrabold button-gradient-1' onClick={() => router.push('/search')}>
                 <span className='p-4 text-md md:text-xl'>Explore Our Products</span>
               </Button>
             </div>
