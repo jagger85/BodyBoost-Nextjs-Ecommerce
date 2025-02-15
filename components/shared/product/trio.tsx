@@ -26,12 +26,19 @@ const sections: SectionData[] = [
 
 const Trio = () => {
   return (
-    <div className='flex gap-8 w-full justify-between'>
+    <div className='flex flex-col md:flex-row gap-6 md:gap-8 w-full md:justify-between'>
       {sections.map((section, index) => (
-        <div key={index} className='flex-1 flex flex-col items-center text-center'>
-          <section.icon className='w-8 h-8 text-primary mb-3' />
-          <h3 className='font-extrabold text-lg mb-2'>{section.title}</h3>
-          <p className='text-muted-foreground'>{section.content}</p>
+        <div
+          key={index}
+          className='flex items-center md:flex-col md:items-center space-x-4 md:space-x-0 flex-1 md:text-center'
+        >
+          <div className='w-8 h-8 mb-0 md:mb-3'>
+            <section.icon className='w-full h-full text-primary' />
+          </div>
+          <div className='flex-1 md:flex-none'>
+            <h3 className='font-extrabold text-lg mb-1'>{section.title}</h3>
+            <p className='text-muted-foreground text-sm md:text-base'>{section.content}</p>
+          </div>
         </div>
       ))}
     </div>
