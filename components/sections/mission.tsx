@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import missionImage from '@/assets/Mission.jpg'
+import missionImage from '@/assets/mission.jpg'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import { Trophy, Medal, HeartPulse, Handshake } from 'lucide-react'
 import React from 'react'

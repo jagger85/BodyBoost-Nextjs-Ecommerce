@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import enduranceImage from '@/assets/Endurance.png'
+import enduranceImage from '@/assets/endurance.png'
 import wellnessImage from '@/assets/wellness.png'
 import muscleGrowthImage from '@/assets/muscle-growth.jpg'
 import weigthLossImage from '@/assets/weigth-loss.png'
@@ -10,7 +10,6 @@ import { useRouter } from 'next/navigation'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 import { productCategories } from '@/lib/constants'
 const baseUrl = '/search?category='
-
 
 // Define benefit data structure
 const benefits = [
@@ -62,13 +61,15 @@ const benefits = [
 ]
 
 // Benefit Card Component
-const BenefitCard = ({ benefit, router }: { benefit: (typeof benefits)[0], router: AppRouterInstance   }) => (
+const BenefitCard = ({ benefit, router }: { benefit: (typeof benefits)[0]; router: AppRouterInstance }) => (
   <div className={`relative flex justify-center items-center ${benefit.isFullHeight ? 'row-span-2' : ''}`}>
-  
-      <Button onClick={() => router.push(benefit.url)} className={`absolute button-gradient-2 z-10 text-w font-extrabold ${benefit.buttonWidth}`}>
-        {benefit.title}
-      </Button>
-  <Image
+    <Button
+      onClick={() => router.push(benefit.url)}
+      className={`absolute button-gradient-2 z-10 text-w font-extrabold ${benefit.buttonWidth}`}
+    >
+      {benefit.title}
+    </Button>
+    <Image
       src={benefit.image}
       alt={benefit.alt}
       className={`${benefit.className} opacity-80`}
@@ -83,9 +84,7 @@ const ShopBenefitSection = () => {
     <div className='wrapper-big flex flex-col w-full items-center justify-center mt-20'>
       <div className='flex flex-col items-center mb-8'>
         <div className='relative'>
-          <div className='text-3xl md:text-5xl  tracking-wider'>
-              FIND BY BENEFIT
-          </div>
+          <div className='text-3xl md:text-5xl  tracking-wider'>FIND BY BENEFIT</div>
         </div>
         <p className='text-muted-foreground mt-2 text-sm uppercase tracking-widest'>Fuel Your Goals</p>
       </div>
