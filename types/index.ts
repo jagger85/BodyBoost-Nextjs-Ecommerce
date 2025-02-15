@@ -34,8 +34,11 @@ export type OrderItem = z.infer<typeof insertOrderItemSchema> & {
   orderId: string
   productId: string
   variantId: string
-  product: Product
-  productVariant: ProductVariant
+  name: string
+  slug: string
+  qty: number
+  image: string
+  price: string
 }
 
 export type Order = z.infer<typeof insertOrderSchema> & {

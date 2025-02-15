@@ -1,18 +1,17 @@
-
 const sampleData = {
   users: [
     {
       name: 'Jagger85',
       email: 'jagger85.crypto@gmail.com',
-      password:'123456',
-      role: 'admin'
+      password: '123456',
+      role: 'admin',
     },
     {
       name: 'Jane',
       email: 'whatever@gmail.com',
       password: '123456',
-      role: 'user'
-    }
+      role: 'user',
+    },
   ],
 
   products: [
@@ -20,11 +19,12 @@ const sampleData = {
       name: 'Polo Sporting Stretch Shirt',
       slug: 'polo-sporting-stretch-shirt',
       category: "Men's Dress Shirts",
+      subCategory: 'Casual',
+      what: 'A versatile dress shirt made with stretch fabric for comfort',
+      when: 'Perfect for business casual or smart casual occasions',
+      why: 'Combines classic style with modern comfort technology',
       description: 'Classic Polo style with modern comfort',
-      images: [
-        '/images/sample-products/p1-1.jpg',
-        '/images/sample-products/p1-2.jpg',
-      ],
+      images: ['/images/sample-products/p1-1.jpg', '/images/sample-products/p1-2.jpg'],
       price: 59.99,
       brand: 'Polo',
       rating: 4.5,
@@ -37,11 +37,12 @@ const sampleData = {
       name: 'Brooks Brothers Long Sleeved Shirt',
       slug: 'brooks-brothers-long-sleeved-shirt',
       category: "Men's Dress Shirts",
+      subCategory: 'Formal',
+      what: 'A premium long-sleeved dress shirt with traditional styling',
+      when: 'Ideal for formal business meetings and special occasions',
+      why: 'Delivers the quality and prestige Brooks Brothers is known for',
       description: 'Timeless style and premium comfort',
-      images: [
-        '/images/sample-products/p2-1.jpg',
-        '/images/sample-products/p2-2.jpg',
-      ],
+      images: ['/images/sample-products/p2-1.jpg', '/images/sample-products/p2-2.jpg'],
       price: 85.9,
       brand: 'Brooks Brothers',
       rating: 4.2,
@@ -54,11 +55,12 @@ const sampleData = {
       name: 'Tommy Hilfiger Classic Fit Dress Shirt',
       slug: 'tommy-hilfiger-classic-fit-dress-shirt',
       category: "Men's Dress Shirts",
+      subCategory: 'Classic Fit',
+      what: 'A classic fit dress shirt with Tommy Hilfiger signature style',
+      when: 'Great for both office wear and formal events',
+      why: 'Offers timeless style with modern American flair',
       description: 'A perfect blend of sophistication and comfort',
-      images: [
-        '/images/sample-products/p3-1.jpg',
-        '/images/sample-products/p3-2.jpg',
-      ],
+      images: ['/images/sample-products/p3-1.jpg', '/images/sample-products/p3-2.jpg'],
       price: 99.95,
       brand: 'Tommy Hilfiger',
       rating: 4.9,
@@ -71,11 +73,12 @@ const sampleData = {
       name: 'Calvin Klein Slim Fit Stretch Shirt',
       slug: 'calvin-klein-slim-fit-stretch-shirt',
       category: "Men's Dress Shirts",
+      subCategory: 'Slim Fit',
+      what: 'A modern slim fit shirt with stretch technology',
+      when: 'Perfect for contemporary business settings',
+      why: 'Combines modern fit with all-day comfort',
       description: 'Streamlined design with flexible stretch fabric',
-      images: [
-        '/images/sample-products/p4-1.jpg',
-        '/images/sample-products/p4-2.jpg',
-      ],
+      images: ['/images/sample-products/p4-1.jpg', '/images/sample-products/p4-2.jpg'],
       price: 39.95,
       brand: 'Calvin Klein',
       rating: 3.6,
@@ -88,11 +91,12 @@ const sampleData = {
       name: 'Polo Ralph Lauren Oxford Shirt',
       slug: 'polo-ralph-lauren-oxford-shirt',
       category: "Men's Dress Shirts",
+      subCategory: 'Oxford',
+      what: 'A classic oxford shirt with signature Polo Ralph Lauren details',
+      when: 'Versatile for both casual and semi-formal occasions',
+      why: 'Delivers timeless style with premium oxford fabric',
       description: 'Iconic Polo design with refined oxford fabric',
-      images: [
-        '/images/sample-products/p5-1.jpg',
-        '/images/sample-products/p5-2.jpg',
-      ],
+      images: ['/images/sample-products/p5-1.jpg', '/images/sample-products/p5-2.jpg'],
       price: 79.99,
       brand: 'Polo',
       rating: 4.7,
@@ -105,11 +109,12 @@ const sampleData = {
       name: 'Polo Classic Pink Hoodie',
       slug: 'polo-classic-pink-hoodie',
       category: "Men's Sweatshirts",
+      subCategory: 'Hoodies',
+      what: 'A comfortable cotton-blend hoodie in classic pink',
+      when: 'Perfect for casual outings and weekend wear',
+      why: "Combines comfort with Polo's signature style",
       description: 'Soft, stylish, and perfect for laid-back days',
-      images: [
-        '/images/sample-products/p6-1.jpg',
-        '/images/sample-products/p6-2.jpg',
-      ],
+      images: ['/images/sample-products/p6-1.jpg', '/images/sample-products/p6-2.jpg'],
       price: 99.99,
       brand: 'Polo',
       rating: 4.6,
@@ -119,6 +124,6 @@ const sampleData = {
       banner: null,
     },
   ],
-};
+}
 
-export default sampleData;
+export default sampleData

@@ -11,9 +11,7 @@ import { Prisma } from '@prisma/client'
 
 // Calculate cart prices
 const calcPrice = (items: CartItem[]) => {
-  const itemsPrice = round2(
-      items.reduce((acc, item) => acc + Number(item.price) * item.qty, 0)
-    ),
+  const itemsPrice = round2(items.reduce((acc, item) => acc + Number(item.price) * item.qty, 0)),
     shippingPrice = round2(itemsPrice > 100 ? 0 : 10),
     taxPrice = round2(0.15 * itemsPrice),
     totalPrice = round2(itemsPrice + taxPrice + shippingPrice)
@@ -45,9 +43,12 @@ export async function addItemToCart(data: CartItem) {
     // Find product in the database
     const product = await prisma.product.findFirst({
       where: { id: item.productId },
+      include: { variants: true },
     })
 
     if (!product) throw new Error('Product not found')
+    const variant = product.variants.find(v => v.id === item.variantId)
+    if (!variant) throw new Error('Variant not found')
 
     if (!cart) {
       const newCart = insertCartSchema.parse({
@@ -70,23 +71,19 @@ export async function addItemToCart(data: CartItem) {
       }
     } else {
       // Check if item is already in the cart
-      const existItem = (cart.items as CartItem[]).find(
-        x => x.productId == item.productId
-      )
+      const existItem = (cart.items as CartItem[]).find(x => x.productId == item.productId)
 
       // Check stock
       if (existItem) {
-        if (product.stock < existItem.qty + 1) {
+        if (variant.stock < existItem.qty + 1) {
           throw new Error('Not enough stock')
         }
         // Increase the quantity
-        ;(cart.items as CartItem[]).find(
-          x => x.productId === item.productId
-        )!.qty = existItem.qty + 1
+        ;(cart.items as CartItem[]).find(x => x.productId === item.productId)!.qty = existItem.qty + 1
       } else {
         //If item does not exist in car
         // Check stock
-        if (product.stock < 1) throw new Error('Not enough stock')
+        if (variant.stock < 1) throw new Error('Not enough stock')
 
         // Add item to the cart.items
         cart.items.push(item)
@@ -103,9 +100,7 @@ export async function addItemToCart(data: CartItem) {
 
       return {
         success: true,
-        message: `${product.name} ${
-          existItem ? 'updated in' : 'added to'
-        } cart`,
+        message: `${product.name} ${existItem ? 'updated in' : 'added to'} cart`,
       }
     }
   } catch (error) {
@@ -160,21 +155,16 @@ export async function removeItemFromCart(productId: string) {
     if (!cart) throw new Error('Cart not found')
 
     // Check for item
-    const exist = (cart.items as CartItem[]).find(
-      x => x.productId === productId
-    )
+    const exist = (cart.items as CartItem[]).find(x => x.productId === productId)
     if (!exist) throw new Error('Item not found')
 
     // Check if onely one in qty
     if (exist.qty === 1) {
       // Remove from cart
-      cart.items = (cart.items as CartItem[]).filter(
-        x => x.productId !== exist.productId
-      )
+      cart.items = (cart.items as CartItem[]).filter(x => x.productId !== exist.productId)
     } else {
       //Decrese qty
-      ;(cart.items as CartItem[]).find(x => x.productId === productId)!.qty =
-        exist.qty - 1
+      ;(cart.items as CartItem[]).find(x => x.productId === productId)!.qty = exist.qty - 1
     }
 
     // Update cart in database

@@ -65,9 +65,14 @@ export async function createOrder() {
       for (const item of cart.items as CartItem[]) {
         await tx.orderItem.create({
           data: {
-            ...item,
-            price: item.price,
             orderId: insertedOrder.id,
+            productId: item.productId,
+            variantId: item.variantId,
+            qty: item.qty,
+            price: item.price,
+            name: item.name,
+            slug: item.slug,
+            image: item.image,
           },
         })
       }
@@ -187,7 +192,13 @@ export async function approvePayPalOrder(orderId: string, data: { orderID: strin
 
 //Update order to paid
 
-export async function updateOrderToPaid({ orderId, paymentResult }: { orderId: string; paymentResult?: PaymentResult }) {
+export async function updateOrderToPaid({
+  orderId,
+  paymentResult,
+}: {
+  orderId: string
+  paymentResult?: PaymentResult
+}) {
   //Get order from database
   const order = await prisma.order.findFirst({
     where: {
@@ -204,8 +215,8 @@ export async function updateOrderToPaid({ orderId, paymentResult }: { orderId: s
   await prisma.$transaction(async tx => {
     //iterate over products and update stock
     for (const item of order.orderitems) {
-      await tx.product.update({
-        where: { id: item.productId },
+      await tx.productVariant.update({
+        where: { id: item.variantId },
         data: { stock: { increment: -item.qty } },
       })
     }
@@ -229,11 +240,13 @@ export async function updateOrderToPaid({ orderId, paymentResult }: { orderId: s
     },
   })
   if (!updatedOrder) throw new Error('Unable to update the order')
-  sendPurchaseReceipt({order: {
-    ...updatedOrder,
-    shippingAddress: updatedOrder.shippingAddress as ShippingAddress,
-    paymentResult: updatedOrder.paymentResult as PaymentResult
-  }})
+  sendPurchaseReceipt({
+    order: {
+      ...updatedOrder,
+      shippingAddress: updatedOrder.shippingAddress as ShippingAddress,
+      paymentResult: updatedOrder.paymentResult as PaymentResult,
+    },
+  })
 }
 
 //Get users orders from database
@@ -304,27 +317,36 @@ export async function getOrderSummary() {
 }
 
 // Get all orders
-export async function getAllOrders({ limit = PAGE_SIZE, page, query }: { limit?: number; page: number, query: string }) {
- 
-  const queryFilter: Prisma.OrderWhereInput = query && query !== 'all' ? {
-    user: {
-      name:{
-        contains: query,
-        mode: 'insensitive'
-      } as Prisma.StringFilter
-    }
-  } : {}
-  
+export async function getAllOrders({
+  limit = PAGE_SIZE,
+  page,
+  query,
+}: {
+  limit?: number
+  page: number
+  query: string
+}) {
+  const queryFilter: Prisma.OrderWhereInput =
+    query && query !== 'all'
+      ? {
+          user: {
+            name: {
+              contains: query,
+              mode: 'insensitive',
+            } as Prisma.StringFilter,
+          },
+        }
+      : {}
+
   const data = await prisma.order.findMany({
-    where:{
-      ...queryFilter
+    where: {
+      ...queryFilter,
     },
     orderBy: { createdAt: 'desc' },
     take: limit,
     skip: (page - 1) * limit,
     include: { user: { select: { name: true } } },
   })
-
 
   const dataCount = await prisma.order.count()
   return {
