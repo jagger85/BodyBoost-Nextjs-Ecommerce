@@ -4,8 +4,6 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Trophy, Medal, HeartPulse, Handshake } from 'lucide-react'
 import React from 'react'
 import { Card, CardHeader, CardContent } from '@/components/ui/card'
-import { Button } from '../ui/button'
-import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
 const MissionSection = () => {
@@ -116,13 +114,6 @@ const MissionSection = () => {
               </div>
             </Carousel>
           </div>
-
-          <Button
-            asChild
-            className='px-8 py-6 text-lg font-semibold w-full md:w-3/4 transition-all duration-300 hover:scale-105'
-          >
-            <Link href='/search'>View All Products</Link>
-          </Button>
         </div>
       </div>
     </section>
